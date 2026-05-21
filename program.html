@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Programs | Vishv Kraanti Samaaj Foundation</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    html,
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+    .container { max-width: 1280px !important; }
+    @keyframes pageLoaderSpin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body class="site-body text-gray-900">
+
+  <div id="pageLoader" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease;">
+    <div style="text-align:center;">
+      <img src="image/logo.png" alt="VKS Foundation" style="height:80px;margin-bottom:24px;">
+      <div style="width:48px;height:48px;border:4px solid rgba(249,115,22,0.2);border-top-color:#f97316;border-radius:50%;animation:pageLoaderSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
+      <p style="color:rgba(255,255,255,0.8);font-size:14px;font-family:'Poppins',sans-serif;">Loading...</p>
+    </div>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+  <!-- Page Hero -->
+  <section class="relative bg-blue-900 text-white py-16 sm:py-20 px-4 sm:px-6 text-center">
+    <div
+      class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb28f74b671?auto=format&fit=crop&q=80')] bg-cover bg-center">
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Our Programs</h1>
+      <p class="text-blue-100 max-w-2xl mx-auto">
+        Focused initiatives that bridge rural talent to urban opportunities and long-term financial independence.
+      </p>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section class="py-16 sm:py-20 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6">
+
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Ongoing Initiatives</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
+          Each program is designed to solve a key barrier faced by rural students—education access, career readiness, and
+          financial stability.
+        </p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Program 1 -->
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm border hover:shadow-xl transition">
+          <div class="p-8">
+            <div class="flex items-start justify-between gap-4">
+              <div class="text-orange-500 text-3xl"><i class="fas fa-graduation-cap"></i></div>
+              <span class="bg-green-100 text-green-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
+                Ongoing
+              </span>
+            </div>
+
+            <h3 class="text-xl font-extrabold text-blue-900 mt-4 mb-3">
+              1. Rural-to-Urban Education Bridge
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              We provide scholarships, mentorship, and logistical support for rural students to study in urban schools
+              and colleges.
+            </p>
+
+            <div class="mt-6 space-y-2 text-sm text-gray-700">
+              <p><span class="font-bold text-blue-900">Target Group:</span> Children aged 7 – 22</p>
+              <p><span class="font-bold text-blue-900">Status:</span> Ongoing</p>
+            </div>
+
+            <a href="contact.html" class="inline-flex mt-7 items-center font-extrabold text-orange-600 hover:underline">
+              Support this Program <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Program 2 -->
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm border hover:shadow-xl transition">
+          <div class="p-8">
+            <div class="flex items-start justify-between gap-4">
+              <div class="text-orange-500 text-3xl"><i class="fas fa-laptop-code"></i></div>
+              <span class="bg-green-100 text-green-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
+                Ongoing
+              </span>
+            </div>
+
+            <h3 class="text-xl font-extrabold text-blue-900 mt-4 mb-3">
+              2. Skill Development Workshops
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              From computer literacy to communication skills, we organize workshops that prepare rural youth for modern
+              careers.
+            </p>
+
+            <div class="mt-6 space-y-2 text-sm text-gray-700">
+              <p><span class="font-bold text-blue-900">Target Group:</span> Youth aged 15 – 25</p>
+              <p><span class="font-bold text-blue-900">Status:</span> Ongoing</p>
+            </div>
+
+            <a href="contact.html" class="inline-flex mt-7 items-center font-extrabold text-orange-600 hover:underline">
+              Volunteer as a Trainer <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Program 3 -->
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm border hover:shadow-xl transition">
+          <div class="p-8">
+            <div class="flex items-start justify-between gap-4">
+              <div class="text-orange-500 text-3xl"><i class="fas fa-wallet"></i></div>
+              <span class="bg-green-100 text-green-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
+                Ongoing
+              </span>
+            </div>
+
+            <h3 class="text-xl font-extrabold text-blue-900 mt-4 mb-3">
+              3. Financial Literacy & Stability Program
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              We guide students on savings, entrepreneurship, and career planning to ensure long-term financial
+              independence.
+            </p>
+
+            <div class="mt-6 space-y-2 text-sm text-gray-700">
+              <p><span class="font-bold text-blue-900">Target Group:</span> College students from rural backgrounds</p>
+              <p><span class="font-bold text-blue-900">Status:</span> Ongoing</p>
+            </div>
+
+            <a href="contact.html" class="inline-flex mt-7 items-center font-extrabold text-orange-600 hover:underline">
+              Partner with Us <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why These Programs -->
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 leading-tight">
+            Why these programs matter
+          </h2>
+          <p class="text-gray-600 mt-5 leading-relaxed">
+            Rural students are talented, but often blocked by lack of access, exposure, and financial awareness.
+            Our programs address these three barriers step-by-step—education access, career readiness, and financial stability.
+          </p>
+
+          <div class="mt-6 space-y-3 text-gray-700">
+            <p>✅ Scholarships + urban guidance for better education</p>
+            <p>✅ Skills training to match modern job requirements</p>
+            <p>✅ Financial literacy for long-term independence</p>
+          </div>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <a href="donate.html"
+              class="inline-flex justify-center bg-orange-500 text-white px-8 py-4 rounded-xl font-extrabold hover:bg-orange-600 transition shadow-md">
+              Donate Now
+            </a>
+            <a href="contact.html"
+              class="inline-flex justify-center border-2 border-blue-900 text-blue-900 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-900 hover:text-white transition">
+              Become a Partner
+            </a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -top-5 -left-5 w-24 h-24 bg-orange-500 rounded-full opacity-20 animate-pulse"></div>
+        <img class="rounded-3xl shadow-2xl w-full object-cover"
+  src="image/programsimg.jpg"
+  alt="Indian village classroom students">  
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-orange-500 py-14 text-center text-white">
+    <div class="container mx-auto px-4 sm:px-6 max-w-3xl">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Support a Rural Student Today</h2>
+      <p class="text-lg mb-8 opacity-90">
+        Your support can help a child study better, learn skills, and become financially independent.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="donate.html" class="bg-blue-900 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-950 transition shadow-lg">
+          Donate Now
+        </a>
+        <a href="contact.html"
+          class="border-2 border-white px-8 py-4 rounded-xl font-extrabold hover:bg-white hover:text-blue-900 transition shadow-lg">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="includes/load.js"></script>
+
+</body>
+</html>

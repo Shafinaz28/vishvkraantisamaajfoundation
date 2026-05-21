@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishv Kraanti Samaaj Foundation | Rural-to-Urban Education Support</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+  html, body { font-family: "Poppins", sans-serif; }
+  body { margin: 0; }
+  .container { max-width: 1280px !important; }
+  @keyframes pageLoaderSpin { to { transform: rotate(360deg); } }
+
+  /* Hero — compact height (not full viewport) */
+  .hero-full{
+    min-height: 72vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-full {
+      min-height: 78vh;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .hero-full{
+      min-height: 58vh !important;
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-inner{
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .hero-img{
+      width: 280px !important;
+      margin-bottom: 10px !important;
+    }
+
+    .container {
+    max-width: 1280px !important;
+}
+
+
+
+    #heroTitle{
+      font-size: 22px !important;
+      line-height: 1.15 !important;
+      margin-bottom: 8px !important;
+    }
+
+    .hero-btns{ gap: 10px !important; }
+
+    .hero-btns a{ height: 52px !important; }
+  }
+
+  /* Load pop animation */
+  @keyframes popIn {
+    0% { transform: scale(.92); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .pop-in { animation: popIn .55s ease-out both; }
+
+  /* Fade up animation */
+  @keyframes fadeUp {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .fade-up { animation: fadeUp .45s ease-out both; }
+
+  /* Lightbox transitions */
+  #lightbox { opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+  #lightbox.open { opacity: 1; pointer-events: auto; }
+
+  @keyframes slideInRight {
+    0% { transform: translateX(20px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideInLeft {
+    0% { transform: translateX(-20px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  .slide-right { animation: slideInRight .22s ease both; }
+  .slide-left { animation: slideInLeft .22s ease both; }
+  #lightboxImg { transition: opacity .18s ease; }
+   
+
+    /* Slide animation for lightbox when next/prev */
+    @keyframes slideInRight {
+      0% { transform: translateX(20px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      0% { transform: translateX(-20px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    .slide-right { animation: slideInRight .22s ease both; }
+    .slide-left { animation: slideInLeft .22s ease both; }
+
+    #lightboxImg { transition: opacity .18s ease; }
+
+    /* Fields of Work — roadmap + sketch background */
+    #fields-of-work {
+      background:
+        radial-gradient(ellipse 80% 50% at 15% 30%, rgba(249,115,22,.14) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 45% at 88% 15%, rgba(59,130,246,.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 70% 85%, rgba(236,72,153,.1) 0%, transparent 48%),
+        radial-gradient(ellipse 50% 35% at 5% 80%, rgba(34,197,94,.08) 0%, transparent 45%),
+        linear-gradient(168deg, #fef7f4 0%, #f4f8ff 42%, #f5f0ff 78%, #faf5ff 100%);
+    }
+    .fields-sketch-dots {
+      background-image: radial-gradient(rgba(148,163,184,.35) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: .4;
+    }
+    .fields-sketch {
+      pointer-events: none;
+      opacity: .35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .fields-sketch--soft { opacity: .22; }
+    .roadmap-step { transition: transform .25s ease; }
+    .roadmap-step.active .roadmap-circle { transform: scale(1.12); box-shadow: 0 12px 28px rgba(0,0,0,.18); }
+    .roadmap-accent { transition: height .25s ease, opacity .25s ease; }
+    .roadmap-step.active .roadmap-accent { opacity: 1; }
+    #fieldCalloutTitle, #fieldCalloutText { transition: opacity .25s ease; }
+    #fields-of-work .roadmap-step.active > span.flex-1 { border-color: #7c3aed; box-shadow: 0 8px 24px rgba(124,58,237,.15); }
+    .roadmap-circle i {
+      font-size: 1.65rem;
+      line-height: 1;
+      display: block;
+    }
+    @media (min-width: 640px) {
+      .roadmap-circle i { font-size: 1.85rem; }
+    }
+    @media (max-width: 767px) {
+      .roadmap-mobile-line { background: linear-gradient(180deg, #7c3aed 0%, #7c3aed 100%); }
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::marker { content: ""; }
+  </style>
+</head>
+
+<body class="site-body text-gray-900">
+
+  <div id="pageLoader" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease;">
+    <div style="text-align:center;">
+      <img src="image/logo.png" alt="VKS Foundation" style="height:80px;margin-bottom:24px;">
+      <div style="width:48px;height:48px;border:4px solid rgba(249,115,22,0.2);border-top-color:#f97316;border-radius:50%;animation:pageLoaderSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
+      <p style="color:rgba(255,255,255,0.8);font-size:14px;font-family:'Poppins',sans-serif;">Loading...</p>
+    </div>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+
+<!-- ✅ FIX: HERO section - remove extra py that breaks full height -->
+<section class="relative bg-blue-900 text-white overflow-hidden hero-full">
+  <div class="absolute inset-0 opacity-25 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+
+  <div class="hero-inner relative container mx-auto px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto text-center">
+      <img id="heroImage" src="image/hero.png" alt="Hero Image"
+        class="hero-img mx-auto w-64 sm:w-80 md:w-[440px] lg:w-[520px] xl:w-[580px] object-contain mb-4 sm:mb-6 opacity-0">
+
+      <div class="max-w-3xl mx-auto mb-4 sm:mb-5">
+        <h1 id="heroTitle" class="text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight opacity-0"></h1>
+        <p id="heroSub" class="mt-3 text-blue-100 text-sm sm:text-lg opacity-0"></p>
+      </div>
+
+      <div class="hero-btns flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+        <a href="donate.html"
+          class="w-64 h-14 flex items-center justify-center bg-orange-500 text-white text-lg font-bold rounded-xl shadow-lg hover:bg-orange-600 transition duration-300">
+          Sponsor a Student
+        </a>
+        <a href="#programs"
+          class="w-64 h-14 flex items-center justify-center bg-white text-blue-900 text-lg font-bold rounded-xl shadow-lg hover:bg-gray-100 transition duration-300">
+          Explore Programs
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- QUICK IMPACT -->
+  <section class="bg-white border-b py-10 sm:py-12 reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
+        <div class="p-6 rounded-2xl hover:bg-blue-50 transition border reveal-stagger">
+          <h3 class="text-4xl font-extrabold text-blue-900">100+</h3>
+          <p class="text-gray-600 uppercase tracking-widest text-xs font-bold mt-2">Students Supported</p>
+        </div>
+        <div class="p-6 rounded-2xl hover:bg-orange-50 transition border reveal-stagger">
+          <h3 class="text-4xl font-extrabold text-orange-500">25+</h3>
+          <p class="text-gray-600 uppercase tracking-widest text-xs font-bold mt-2">Volunteers Engaged</p>
+        </div>
+        <div class="p-6 rounded-2xl hover:bg-blue-50 transition border reveal-stagger">
+          <h3 class="text-4xl font-extrabold text-blue-900">10+</h3>
+          <p class="text-gray-600 uppercase tracking-widest text-xs font-bold mt-2">Initiatives Completed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="py-14 sm:py-20 bg-gray-50 reveal">
+    <div class="container mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="reveal-stagger">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight border-l-8 border-orange-500 pl-6">
+          Our Story
+        </h2>
+        <p class="mt-5 text-gray-700 text-base sm:text-lg leading-relaxed">
+          Founded in <b>2020</b> (formally registered in <b>2026</b>) by <b>Bondili Sai Manoj</b> and <b>Prasad Majji</b>,
+          Vishv Kraanti Samaaj Foundation began with one dream:
+          <b>rural children should never be left behind</b> due to lack of resources.
+        </p>
+        <p class="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed">
+          From our beginnings in Andhra Pradesh, we have grown into a movement that guides rural students toward
+          <b>urban education</b>, real-world skills, and <b>financial independence</b>.
+        </p>
+
+        <div class="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <a href="about.html"
+            class="inline-flex justify-center bg-blue-900 text-white px-8 py-4 rounded-xl font-extrabold hover:bg-blue-950">
+            Read More About Us
+          </a>
+          <a href="volunteer.html"
+            class="inline-flex justify-center bg-white border-2 border-blue-900 text-blue-900 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-50">
+            Become a Volunteer
+          </a>
+        </div>
+      </div>
+
+      <div class="relative reveal-stagger">
+        <div class="absolute -top-6 -left-6 w-24 h-24 bg-orange-500 rounded-full opacity-20 animate-pulse"></div>
+        <img class="relative z-10 w-full rounded-3xl shadow-2xl object-cover" src="image/ourstoryimg.jpg" alt="Students">
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR FIELDS OF WORK — roadmap infographic -->
+  <section id="fields-of-work" class="py-14 sm:py-20 relative overflow-hidden reveal">
+    <div class="fields-sketch-dots absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+    <!-- Hand-drawn style sketches -->
+    <svg class="fields-sketch absolute top-8 left-[3%] w-28 h-28 sm:w-36 sm:h-36 text-orange-300" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M20 70 Q35 35 50 55 T80 40" stroke-dasharray="4 5"/>
+      <circle cx="72" cy="28" r="8" fill="currentColor" opacity=".25"/>
+      <path d="M25 78 L35 62 M45 78 L50 58" stroke-width="1.5"/>
+    </svg>
+    <svg class="fields-sketch absolute top-24 right-[5%] w-24 h-24 text-pink-300" viewBox="0 0 80 80" aria-hidden="true" fill="currentColor">
+      <path d="M40 12 L44 28 L60 28 L48 38 L52 54 L40 44 L28 54 L32 38 L20 28 L36 28 Z" opacity=".5"/>
+    </svg>
+    <svg class="fields-sketch fields-sketch--soft absolute top-1/3 left-[8%] w-20 h-32 text-blue-200" viewBox="0 0 60 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="18" y="8" width="24" height="32" rx="3" stroke-dasharray="5 4"/>
+      <line x1="22" y1="18" x2="38" y2="18"/><line x1="22" y1="26" x2="34" y2="26"/>
+      <path d="M12 88 Q30 70 48 88" stroke-width="2.5"/>
+    </svg>
+    <svg class="fields-sketch absolute bottom-32 right-[8%] w-32 h-32 text-emerald-200" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="50" cy="50" r="38" stroke-dasharray="10 8"/>
+      <path d="M35 55 c8-18 22-18 30 0" fill="currentColor" opacity=".15"/>
+      <circle cx="42" cy="48" r="3" fill="currentColor" opacity=".4"/><circle cx="58" cy="48" r="3" fill="currentColor" opacity=".4"/>
+      <path d="M44 62 Q50 68 56 62" stroke-width="1.5"/>
+    </svg>
+    <svg class="fields-sketch fields-sketch--soft absolute bottom-16 left-[6%] w-40 h-24 text-violet-300" viewBox="0 0 120 60" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M5 45 Q30 15 60 40 T115 25"/>
+      <path d="M10 50 Q40 30 70 48" opacity=".6"/>
+    </svg>
+    <svg class="fields-sketch absolute bottom-8 right-[18%] w-16 h-16 text-amber-300" viewBox="0 0 50 50" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M25 8 L27 20 L39 22 L29 30 L32 42 L25 34 L18 42 L21 30 L11 22 L23 20 Z" opacity=".7"/>
+    </svg>
+    <svg class="fields-sketch fields-sketch--soft absolute top-[45%] right-[2%] w-14 h-40 text-cyan-200 hidden sm:block" viewBox="0 0 40 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M20 5 L20 75 M12 85 L20 95 L28 85"/>
+      <ellipse cx="20" cy="8" rx="6" ry="4" fill="currentColor" opacity=".2"/>
+    </svg>
+    <svg class="fields-sketch absolute top-12 left-[42%] w-12 h-12 text-orange-200 hidden md:block" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="20" cy="20" r="14" stroke-dasharray="3 4"/>
+      <text x="11" y="25" font-size="14" font-family="Poppins,sans-serif" fill="currentColor" opacity=".5" stroke="none">A+</text>
+    </svg>
+
+    <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-violet-200/25 blur-2xl -translate-y-1/3 translate-x-1/4 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-orange-200/20 blur-2xl translate-y-1/4 -translate-x-1/4 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-blue-100/15 blur-3xl pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+      <h2 class="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-orange-500 tracking-wide uppercase reveal-stagger">
+        Our Fields of Work
+      </h2>
+      <p class="text-center text-gray-600 mt-3 max-w-2xl mx-auto text-sm sm:text-base reveal-stagger">
+        Follow our impact path — select a step to explore how we support rural students.
+      </p>
+
+      <div class="hidden md:block mt-14 max-w-6xl mx-auto reveal-stagger">
+        <div class="relative h-[220px]" id="roadmapTimeline">
+          <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 80 75 C 200 75 200 145 320 145 C 440 145 440 75 560 75 C 680 75 680 145 800 145 C 920 145 920 75 1040 75" fill="none" stroke="#1e293b" stroke-width="14" stroke-linecap="round"/>
+            <path d="M 80 75 C 200 75 200 145 320 145 C 440 145 440 75 560 75 C 680 75 680 145 800 145 C 920 145 920 75 1040 75" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="12 14" stroke-linecap="round"/>
+          </svg>
+          <div class="relative z-10 grid grid-cols-6 h-full" id="fieldTabs" role="tablist" aria-label="Fields of work">
+            <button type="button" role="tab" data-field="education" aria-selected="true" class="roadmap-step active flex flex-col items-center justify-start pt-2">
+              <span class="roadmap-accent w-0.5 h-10 bg-orange-500 mb-1 rounded-full opacity-100"></span>
+              <span class="w-3 h-3 rounded-full bg-orange-500 mb-2"></span>
+              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-orange-500 text-white grid place-items-center shadow-lg border-4 border-white"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-orange-600">Education</span>
+            </button>
+            <button type="button" role="tab" data-field="health" aria-selected="false" class="roadmap-step flex flex-col items-center justify-end pb-2">
+              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-pink-500 order-3">Health</span>
+              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-pink-500 text-white grid place-items-center shadow-lg border-4 border-white order-2"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></span>
+              <span class="w-3 h-3 rounded-full bg-pink-500 my-2 order-1"></span>
+              <span class="roadmap-accent w-0.5 h-10 bg-pink-500 rounded-full opacity-70 order-0"></span>
+            </button>
+            <button type="button" role="tab" data-field="resilience" aria-selected="false" class="roadmap-step flex flex-col items-center justify-start pt-2">
+              <span class="roadmap-accent w-0.5 h-10 bg-cyan-500 mb-1 rounded-full opacity-70"></span>
+              <span class="w-3 h-3 rounded-full bg-cyan-500 mb-2"></span>
+              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-cyan-500 text-white grid place-items-center shadow-lg border-4 border-white"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-cyan-600">Resilience</span>
+            </button>
+            <button type="button" role="tab" data-field="livelihood" aria-selected="false" class="roadmap-step flex flex-col items-center justify-end pb-2">
+              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 order-3">Livelihood</span>
+              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-emerald-500 text-white grid place-items-center shadow-lg border-4 border-white order-2"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500 my-2 order-1"></span>
+              <span class="roadmap-accent w-0.5 h-10 bg-emerald-500 rounded-full opacity-70 order-0"></span>
+            </button>
+            <button type="button" role="tab" data-field="protection" aria-selected="false" class="roadmap-step flex flex-col items-center justify-start pt-2">
+              <span class="roadmap-accent w-0.5 h-10 bg-amber-400 mb-1 rounded-full opacity-70"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400 mb-2"></span>
+              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-amber-400 text-white grid place-items-center shadow-lg border-4 border-white"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-amber-600">Protection</span>
+            </button>
+            <button type="button" role="tab" data-field="humanitarian" aria-selected="false" class="roadmap-step flex flex-col items-center justify-end pb-2">
+              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-blue-700 order-3">Humanitarian</span>
+              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-blue-600 text-white grid place-items-center shadow-lg border-4 border-white order-2"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></span>
+              <span class="w-3 h-3 rounded-full bg-blue-600 my-2 order-1"></span>
+              <span class="roadmap-accent w-0.5 h-10 bg-blue-600 rounded-full opacity-70 order-0"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:hidden mt-10 max-w-md mx-auto relative reveal-stagger">
+        <div class="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-4 rounded-full bg-violet-600 roadmap-mobile-line"></div>
+        <div class="relative space-y-10">
+          <button type="button" data-field="education" class="roadmap-step active w-full flex items-center gap-4 text-left">
+            <span class="shrink-0 w-14 h-14 rounded-full bg-orange-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-book-open text-xl" aria-hidden="true"></i></span>
+            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100"><span class="text-xs font-extrabold uppercase text-red-500">Education</span></span>
+          </button>
+          <button type="button" data-field="health" class="roadmap-step w-full flex items-center gap-4 text-left flex-row-reverse">
+            <span class="shrink-0 w-14 h-14 rounded-full bg-pink-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-heart-pulse text-xl" aria-hidden="true"></i></span>
+            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100 text-right"><span class="text-xs font-extrabold uppercase text-amber-600">Health</span></span>
+          </button>
+          <button type="button" data-field="resilience" class="roadmap-step w-full flex items-center gap-4 text-left">
+            <span class="shrink-0 w-14 h-14 rounded-full bg-cyan-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-bolt text-xl" aria-hidden="true"></i></span>
+            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100"><span class="text-xs font-extrabold uppercase text-emerald-600">Resilience</span></span>
+          </button>
+          <button type="button" data-field="livelihood" class="roadmap-step w-full flex items-center gap-4 text-left flex-row-reverse">
+            <span class="shrink-0 w-14 h-14 rounded-full bg-emerald-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-seedling text-xl" aria-hidden="true"></i></span>
+            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100 text-right"><span class="text-xs font-extrabold uppercase text-cyan-600">Livelihood</span></span>
+          </button>
+          <button type="button" data-field="protection" class="roadmap-step w-full flex items-center gap-4 text-left">
+            <span class="shrink-0 w-14 h-14 rounded-full bg-amber-400 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-shield-halved text-xl" aria-hidden="true"></i></span>
+            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100"><span class="text-xs font-extrabold uppercase text-orange-600">Protection</span></span>
+          </button>
+          <button type="button" data-field="humanitarian" class="roadmap-step w-full flex items-center gap-4 text-left flex-row-reverse">
+            <span class="shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-hand-holding-heart text-xl" aria-hidden="true"></i></span>
+            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100 text-right"><span class="text-xs font-extrabold uppercase text-violet-700">Humanitarian</span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-10 sm:mt-14 max-w-6xl mx-auto reveal-stagger">
+        <div class="grid grid-cols-1 md:grid-cols-[1.35fr_0.65fr] gap-5 sm:gap-6 items-center">
+          <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-violet-100 p-5 sm:p-8 flex flex-col sm:flex-row gap-5 sm:gap-6 items-start">
+            <div id="fieldCalloutIconWrap" class="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-orange-500 text-white text-2xl sm:text-3xl grid place-items-center shadow-md">
+              <i id="fieldCalloutIcon" class="fa-solid fa-book-open"></i>
+            </div>
+            <div class="flex-1 min-w-0 flex flex-col h-full">
+              <p id="fieldCalloutStep" class="text-xs font-extrabold uppercase tracking-widest text-violet-600 mb-1">Step 01</p>
+              <h3 id="fieldCalloutTitle" class="text-base sm:text-lg font-extrabold uppercase text-gray-900 leading-snug">Shiksha Ki Raksha, Bhavishya Ki Raksha!</h3>
+              <p id="fieldCalloutText" class="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed flex-1">
+                From early childhood to young adulthood, quality education unlocks potential. Vishv Kraanti Samaaj Foundation champions rural students across Andhra Pradesh—scholarships, mentorship, and urban school access remove barriers from village classrooms to city colleges.
+              </p>
+              <a id="fieldKnowMore" href="donate.html" class="mt-5 inline-flex self-start px-8 py-3 rounded-lg font-extrabold text-white uppercase text-sm bg-orange-500 hover:opacity-90 transition shadow-md">Know More</a>
+            </div>
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-lg border border-violet-100 h-40 sm:h-44 md:h-52 max-w-sm md:max-w-none md:mx-auto w-full">
+            <img id="fieldPanelImg" src="image/rural-to-urban-education-bridge.jpg" alt="Education program" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programs" class="py-14 sm:py-20 bg-white reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 sm:mb-12 reveal-stagger">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Programs That Create Change</h2>
+        <p class="text-gray-600 mt-3 max-w-3xl mx-auto">
+          We focus on measurable outcomes—education access, skill readiness, and long-term financial stability.
+        </p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-7 sm:gap-8">
+        <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border reveal-stagger">
+          <img class="w-full h-52 object-cover" src="image/rural-to-urban-education-bridge.jpg" alt="Education Bridge">
+          <div class="p-7">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-10 h-10 rounded-xl bg-blue-900 text-white grid place-items-center">
+                <i class="fa-solid fa-school"></i>
+              </span>
+              <h3 class="text-xl font-extrabold text-blue-900">Rural-to-Urban Education Bridge</h3>
+            </div>
+            <p class="text-gray-600 mb-5">
+              Scholarships, mentorship and logistical support to help rural students study in urban schools & colleges.
+            </p>
+            <p class="text-sm text-gray-500"><b>Target:</b> 7–22 yrs • <b>Status:</b> Ongoing</p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border reveal-stagger">
+          <img class="w-full h-52 object-cover" src="image/ngo-skill-development-workshop.jpg" alt="Skill Workshops">
+          <div class="p-7">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-10 h-10 rounded-xl bg-orange-500 text-white grid place-items-center">
+                <i class="fa-solid fa-laptop-code"></i>
+              </span>
+              <h3 class="text-xl font-extrabold text-blue-900">Skill Development Workshops</h3>
+            </div>
+            <p class="text-gray-600 mb-5">
+              Computer literacy, communication skills and career readiness workshops for modern opportunities.
+            </p>
+            <p class="text-sm text-gray-500"><b>Target:</b> 15–25 yrs • <b>Status:</b> Ongoing</p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border reveal-stagger">
+          <img class="w-full h-52 object-cover" src="image/financial-independence-training.jpg" alt="Financial Literacy">
+          <div class="p-7">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-10 h-10 rounded-xl bg-blue-900 text-white grid place-items-center">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+              </span>
+              <h3 class="text-xl font-extrabold text-blue-900">Financial Literacy & Stability</h3>
+            </div>
+            <p class="text-gray-600 mb-5">
+              Guidance on savings, entrepreneurship and career planning to ensure long-term financial independence.
+            </p>
+            <p class="text-sm text-gray-500"><b>Target:</b> Rural college students • <b>Status:</b> Ongoing</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-10 reveal-stagger">
+        <a href="program.html"
+          class="inline-flex bg-blue-900 text-white px-10 py-4 rounded-xl font-extrabold hover:bg-blue-950">
+          View All Programs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="py-14 sm:py-20 bg-gray-50 reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="max-w-5xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border relative reveal-stagger">
+        <i class="fas fa-quote-left text-orange-400 text-5xl absolute -top-6 left-8 opacity-60"></i>
+        <h3 class="text-2xl md:text-3xl font-extrabold text-blue-900 mb-5">A Student’s Journey Can Change a Whole Family</h3>
+        <p class="text-lg md:text-2xl leading-relaxed italic text-gray-800">
+          “This NGO gave me the chance to study in Sydney. Today, I am financially independent and supporting my family and other students.”
+        </p>
+        <div class="mt-7 flex items-center gap-4">
+          <div class="w-14 h-14 bg-gray-200 rounded-full border-2 border-orange-500"></div>
+          <div>
+            <p class="font-extrabold text-blue-900">Narasimha</p>
+            <p class="text-gray-600 text-sm italic">Alumni • Education Bridge Program</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUNTEERS -->
+  <section class="py-14 sm:py-20 bg-white reveal">
+    <div class="container mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="reveal-stagger">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Powered by Volunteers</h2>
+        <p class="text-gray-600 mt-4 text-lg">
+          Our volunteers are the backbone of our mission—mentoring, organizing workshops, and helping students grow with confidence.
+        </p>
+
+        <div class="mt-6 space-y-4">
+          <div class="bg-gray-50 border rounded-2xl p-5 reveal-stagger">
+            <p class="font-extrabold text-blue-900">CA Shareesh Gadde — Mentor</p>
+            <p class="text-gray-600 text-sm mt-1">Guides rural students through their academic journey.</p>
+          </div>
+          <div class="bg-gray-50 border rounded-2xl p-5 reveal-stagger">
+            <p class="font-extrabold text-blue-900">Mr. Gopi Krishna — Mentor</p>
+            <p class="text-gray-600 text-sm mt-1">Organizes workshops and ensures smooth program execution.</p>
+          </div>
+        </div>
+
+        <a href="volunteer.html"
+          class="inline-flex mt-8 bg-orange-500 text-white px-10 py-4 rounded-xl font-extrabold hover:bg-orange-600 shadow-md">
+          Join as Volunteer
+        </a>
+      </div>
+
+      <div class="relative reveal-stagger">
+        <img class="rounded-3xl shadow-2xl w-full object-cover" src="image/vks-mentors-volunteers-action.jpg" alt="Volunteer">
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE CTA -->
+  <section class="bg-blue-900 text-white py-12 sm:py-14 reveal">
+    <div class="container mx-auto px-4 sm:px-6 text-center max-w-4xl reveal-stagger">
+      <h2 class="text-3xl sm:text-4xl font-extrabold">Help a Rural Student Reach Their Potential</h2>
+      <p class="mt-4 text-blue-100 text-lg">Your donation supports scholarships, skill workshops, and financial literacy guidance.</p>
+      <div class="mt-7 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <a href="donate.html" class="bg-orange-500 px-10 py-4 rounded-xl font-extrabold hover:bg-orange-600 shadow-lg">Donate Now</a>
+        <a href="contact.html" class="bg-white text-blue-900 px-10 py-4 rounded-xl font-extrabold hover:bg-gray-100 shadow-lg">Partner With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="py-14 sm:py-20 bg-gray-50 reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 sm:mb-12 reveal-stagger">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Moments That Matter</h2>
+        <p class="text-gray-600 mt-3">Scholarships • Workshops • Awareness Drives • Student Interactions</p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+
+      <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <button class="gallery-item group relative overflow-hidden rounded-2xl reveal-stagger">
+          <img class="h-36 sm:h-44 md:h-52 w-full object-cover transition duration-300 group-hover:scale-105"
+               src="image/img1.jpg" data-full="image/img1.jpg" data-caption="Scholarship support moment" alt="Gallery 1">
+          <span class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></span>
+        </button>
+
+        <button class="gallery-item group relative overflow-hidden rounded-2xl reveal-stagger">
+          <img class="h-36 sm:h-44 md:h-52 w-full object-cover transition duration-300 group-hover:scale-105"
+               src="image/img.jpg" data-full="image/img.jpg" data-caption="Workshop in progress" alt="Gallery 2">
+          <span class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></span>
+        </button>
+
+        <button class="gallery-item group relative overflow-hidden rounded-2xl reveal-stagger">
+          <img class="h-36 sm:h-44 md:h-52 w-full object-cover transition duration-300 group-hover:scale-105"
+               src="image/img2.jpg" data-full="image/img2.jpg" data-caption="Student interaction" alt="Gallery 3">
+          <span class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></span>
+        </button>
+
+        <button class="gallery-item group relative overflow-hidden rounded-2xl reveal-stagger">
+          <img class="h-36 sm:h-44 md:h-52 w-full object-cover transition duration-300 group-hover:scale-105"
+               src="image/img3.jpg" data-full="image/img3.jpg" data-caption="Awareness drive" alt="Gallery 4">
+          <span class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></span>
+        </button>
+      </div>
+
+      <div class="text-center mt-10 reveal-stagger">
+        <a href="gallery.html"
+          class="inline-flex bg-white border-2 border-blue-900 text-blue-900 px-10 py-4 rounded-xl font-extrabold hover:bg-blue-50">
+          View Full Gallery
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-14 sm:py-20 bg-white reveal">
+    <div class="container mx-auto px-4 sm:px-6 max-w-4xl">
+      <div class="text-center mb-10 sm:mb-12 reveal-stagger">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Frequently Asked Questions</h2>
+        <p class="text-gray-600 mt-3">Quick answers about our work, donations, and how you can get involved.</p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+
+      <div class="space-y-4 reveal-stagger">
+        <details class="faq-item group bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden open:border-orange-300 open:shadow-md transition" open>
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 sm:px-6 py-4 font-extrabold text-blue-900">
+            <span>Who does Vishv Kraanti Samaaj Foundation support?</span>
+            <i class="faq-chevron fa-solid fa-chevron-down text-orange-500 shrink-0 transition-transform group-open:rotate-180"></i>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 text-sm sm:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
+            We support rural children and students—especially from Andhra Pradesh—who need help accessing urban education, skill training, mentorship, and financial guidance to build independent futures.
+          </div>
+        </details>
+
+        <details class="faq-item group bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden open:border-orange-300 open:shadow-md transition">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 sm:px-6 py-4 font-extrabold text-blue-900">
+            <span>What programs do you run?</span>
+            <i class="faq-chevron fa-solid fa-chevron-down text-orange-500 shrink-0 transition-transform group-open:rotate-180"></i>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 text-sm sm:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
+            Our main initiatives include the Rural-to-Urban Education Bridge, Skill Development Workshops, and Financial Literacy &amp; Stability programs. Visit our <a href="program.html" class="text-orange-600 font-semibold hover:underline">Programs</a> page to learn more.
+          </div>
+        </details>
+
+        <details class="faq-item group bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden open:border-orange-300 open:shadow-md transition">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 sm:px-6 py-4 font-extrabold text-blue-900">
+            <span>How can I donate?</span>
+            <i class="faq-chevron fa-solid fa-chevron-down text-orange-500 shrink-0 transition-transform group-open:rotate-180"></i>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 text-sm sm:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
+            You can donate online through our <a href="donate.html" class="text-orange-600 font-semibold hover:underline">Donate</a> page or transfer directly to our foundation bank account (AU Small Finance Bank). Every contribution supports scholarships, workshops, and student support.
+          </div>
+        </details>
+
+        <details class="faq-item group bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden open:border-orange-300 open:shadow-md transition">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 sm:px-6 py-4 font-extrabold text-blue-900">
+            <span>Can I volunteer or mentor students?</span>
+            <i class="faq-chevron fa-solid fa-chevron-down text-orange-500 shrink-0 transition-transform group-open:rotate-180"></i>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 text-sm sm:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
+            Yes. Volunteers help with mentoring, workshops, and program coordination. Reach out via our <a href="contact.html" class="text-orange-600 font-semibold hover:underline">Contact</a> page or email <a href="mailto:info@vksfoundation.org" class="text-orange-600 font-semibold hover:underline">info@vksfoundation.org</a>.
+          </div>
+        </details>
+
+        <details class="faq-item group bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden open:border-orange-300 open:shadow-md transition">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 sm:px-6 py-4 font-extrabold text-blue-900">
+            <span>Where is the foundation based?</span>
+            <i class="faq-chevron fa-solid fa-chevron-down text-orange-500 shrink-0 transition-transform group-open:rotate-180"></i>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 text-sm sm:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
+            We work across India with roots in Andhra Pradesh (Rajahmundry) and a presence in Bengaluru, Karnataka. See full addresses on our <a href="contact.html" class="text-orange-600 font-semibold hover:underline">Contact</a> page.
+          </div>
+        </details>
+
+        <details class="faq-item group bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden open:border-orange-300 open:shadow-md transition">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 sm:px-6 py-4 font-extrabold text-blue-900">
+            <span>How can I partner with VKS Foundation (CSR / schools)?</span>
+            <i class="faq-chevron fa-solid fa-chevron-down text-orange-500 shrink-0 transition-transform group-open:rotate-180"></i>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 text-sm sm:text-base text-gray-600 leading-relaxed border-t border-gray-200 pt-4">
+            Companies, schools, and community groups can partner with us for CSR initiatives, sponsorships, and awareness drives. Call <a href="tel:+919353085494" class="text-orange-600 font-semibold hover:underline">+91 93530 85494</a> or write to us through the contact form.
+          </div>
+        </details>
+      </div>
+
+      <div class="mt-10 text-center reveal-stagger">
+        <p class="text-gray-600 text-sm">Still have questions?</p>
+        <a href="contact.html" class="inline-flex mt-4 bg-blue-900 text-white px-8 py-3 rounded-xl font-extrabold hover:bg-blue-950 transition">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="fixed inset-0 z-[999]">
+    <div id="lightboxBackdrop" class="absolute inset-0 bg-black/80"></div>
+
+    <div class="relative h-full w-full flex items-center justify-center p-4">
+      <button id="lightboxClose"
+        class="absolute top-5 right-5 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl flex items-center justify-center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <button id="lightboxPrev"
+        class="absolute left-4 md:left-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl flex items-center justify-center">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <button id="lightboxNext"
+        class="absolute right-4 md:right-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl flex items-center justify-center">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <div class="max-w-5xl w-full">
+        <img id="lightboxImg"
+          class="w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl bg-black"
+          src="" alt="Full image">
+        <p id="lightboxCaption" class="text-white/90 text-center mt-4 text-sm md:text-base"></p>
+        <p id="lightboxCounter" class="text-white/60 text-center mt-1 text-xs"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="includes/load.js"></script>
+  <script>
+    // -------------------------
+    // HERO POP + TEXT SLIDES (ON LOAD)
+    // -------------------------
+    const heroImage = document.getElementById("heroImage");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroSub = document.getElementById("heroSub");
+
+    const heroSlides = [
+      { title: "Rural to Urban Education Bridge", sub: "Supporting students from villages to access quality education in cities." },
+      { title: "Skills for Tomorrow", sub: "Workshops in digital literacy, communication, and career readiness." },
+      { title: "Financial Independence", sub: "Guidance on savings, entrepreneurship, and long-term stability." }
+    ];
+
+    function showHeroSlide(i) {
+      const slide = heroSlides[i];
+      heroTitle.classList.remove("fade-up");
+      heroSub.classList.remove("fade-up");
+      heroTitle.style.opacity = "0";
+      heroSub.style.opacity = "0";
+
+      heroTitle.textContent = slide.title;
+      heroSub.textContent = slide.sub;
+
+      setTimeout(() => {
+        heroTitle.style.opacity = "1";
+        heroSub.style.opacity = "1";
+        heroTitle.classList.add("fade-up");
+        heroSub.classList.add("fade-up");
+      }, 80);
+    }
+
+    window.addEventListener("load", () => {
+      heroImage.style.opacity = "1";
+      heroImage.classList.add("pop-in");
+
+      let idx = 0;
+      showHeroSlide(idx);
+      setInterval(() => {
+        idx = (idx + 1) % heroSlides.length;
+        showHeroSlide(idx);
+      }, 2600);
+    });
+
+    // Scroll animations: GSAP via includes/load.js
+
+    // -------------------------
+    // GALLERY LIGHTBOX MODAL + SLIDE ANIMATION on Prev/Next
+    // -------------------------
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxCounter = document.getElementById("lightboxCounter");
+    const btnClose = document.getElementById("lightboxClose");
+    const btnPrev = document.getElementById("lightboxPrev");
+    const btnNext = document.getElementById("lightboxNext");
+    const backdrop = document.getElementById("lightboxBackdrop");
+
+    const galleryImages = Array.from(document.querySelectorAll("#galleryGrid img"));
+    let currentIndex = 0;
+
+    function openLightbox(index, direction = "right") {
+      currentIndex = index;
+      const img = galleryImages[currentIndex];
+      const fullSrc = img.dataset.full || img.src;
+      const caption = img.dataset.caption || img.alt || "";
+
+      // open
+      lightbox.classList.add("open");
+      document.body.classList.add("overflow-hidden");
+
+      // animate direction
+      lightboxImg.classList.remove("slide-left", "slide-right");
+      lightboxImg.style.opacity = "0";
+
+      setTimeout(() => {
+        lightboxImg.src = fullSrc;
+        lightboxCaption.textContent = caption;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+
+        lightboxImg.style.opacity = "1";
+        lightboxImg.classList.add(direction === "left" ? "slide-left" : "slide-right");
+      }, 120);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      document.body.classList.remove("overflow-hidden");
+      lightboxImg.src = "";
+    }
+
+    function showNext() {
+      const next = (currentIndex + 1) % galleryImages.length;
+      openLightbox(next, "right");
+    }
+
+    function showPrev() {
+      const prev = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      openLightbox(prev, "left");
+    }
+
+    // Open on image click
+    galleryImages.forEach((img, idx) => {
+      img.addEventListener("click", (e) => {
+        e.preventDefault();
+        openLightbox(idx, "right");
+      });
+    });
+
+    btnClose.addEventListener("click", closeLightbox);
+    backdrop.addEventListener("click", closeLightbox);
+    btnNext.addEventListener("click", showNext);
+    btnPrev.addEventListener("click", showPrev);
+
+    // Keyboard controls
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "ArrowLeft") showPrev();
+    });
+
+    // Swipe support (mobile)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) showNext(); else showPrev();
+      }
+    }, { passive: true });
+
+    // Start closed
+    closeLightbox();
+
+    // -------------------------
+    // FIELDS OF WORK — roadmap steps
+    // -------------------------
+    const fieldData = {
+      education: { step: "01", color: "bg-orange-500", icon: "fa-book-open", image: "image/rural-to-urban-education-bridge.jpg", alt: "Rural to urban education", title: "Shiksha Ki Raksha, Bhavishya Ki Raksha!", text: "From early childhood to young adulthood, quality education unlocks potential. Vishv Kraanti Samaaj Foundation champions rural students across Andhra Pradesh—scholarships, mentorship, and urban school access remove barriers from village classrooms to city colleges. Supporting 100+ students, we help families break the cycle of limited opportunity." },
+      health: { step: "02", color: "bg-pink-500", icon: "fa-heart-pulse", image: "image/img3.jpg", alt: "Health and wellness awareness", title: "Healthy Students, Stronger Futures", text: "Student well-being is essential for learning. We support health awareness sessions, hygiene education, and referrals for basic medical needs so rural youth can attend school without preventable illness holding them back." },
+      resilience: { step: "03", color: "bg-cyan-500", icon: "fa-bolt", image: "image/img2.jpg", alt: "Resilience and life skills", title: "Building Confidence Through Challenges", text: "Life skills, counseling support, and peer mentoring help students adapt to new urban environments. We strengthen emotional resilience so setbacks do not end their education journey." },
+      livelihood: { step: "04", color: "bg-emerald-500", icon: "fa-seedling", image: "image/financial-independence-training.jpg", alt: "Livelihood and financial literacy", title: "Skills That Earn, Futures That Last", text: "Financial literacy workshops, career guidance, and entrepreneurship basics prepare students for real income. We connect rural talent to urban job markets and sustainable livelihood paths." },
+      protection: { step: "05", color: "bg-amber-400", icon: "fa-shield-halved", image: "image/vks-mentors-volunteers-action.jpg", alt: "Student protection and mentorship", title: "Safe Spaces, Trusted Mentors", text: "Volunteer mentors and program coordinators create accountable support networks. Students receive guidance on rights, safety, and ethical conduct throughout their transition from village to city." },
+      humanitarian: { step: "06", color: "bg-blue-600", icon: "fa-hand-holding-heart", image: "image/ngo-skill-development-workshop.jpg", alt: "Humanitarian outreach", title: "Reaching Families In Times Of Need", text: "Emergency support for education costs, workshop supplies, and community outreach during crises. Your contribution helps us respond when rural families face sudden hardship that threatens a child's schooling." }
+    };
+
+    const colorClasses = ["bg-orange-500", "bg-pink-500", "bg-cyan-500", "bg-emerald-500", "bg-amber-400", "bg-blue-600"];
+    const fieldSteps = document.querySelectorAll("#fields-of-work .roadmap-step[data-field]");
+    const fieldCalloutIconWrap = document.getElementById("fieldCalloutIconWrap");
+    const fieldCalloutIcon = document.getElementById("fieldCalloutIcon");
+    const fieldCalloutStep = document.getElementById("fieldCalloutStep");
+    const fieldCalloutTitle = document.getElementById("fieldCalloutTitle");
+    const fieldCalloutText = document.getElementById("fieldCalloutText");
+    const fieldKnowMore = document.getElementById("fieldKnowMore");
+    const fieldPanelImg = document.getElementById("fieldPanelImg");
+
+    function setFieldTab(key) {
+      const data = fieldData[key];
+      if (!data) return;
+
+      fieldSteps.forEach((tab) => {
+        const isActive = tab.dataset.field === key;
+        tab.classList.toggle("active", isActive);
+        if (tab.hasAttribute("aria-selected")) tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      fieldCalloutTitle.style.opacity = "0";
+      fieldCalloutText.style.opacity = "0";
+
+      setTimeout(() => {
+        colorClasses.forEach((c) => { fieldCalloutIconWrap.classList.remove(c); fieldKnowMore.classList.remove(c); });
+        fieldCalloutIconWrap.classList.add(data.color);
+        fieldKnowMore.classList.add(data.color);
+        fieldCalloutIcon.className = "fa-solid " + data.icon;
+        fieldCalloutStep.textContent = "Step " + data.step;
+        fieldCalloutTitle.textContent = data.title;
+        fieldCalloutText.textContent = data.text;
+        fieldPanelImg.src = data.image;
+        fieldPanelImg.alt = data.alt;
+        fieldCalloutTitle.style.opacity = "1";
+        fieldCalloutText.style.opacity = "1";
+      }, 120);
+    }
+
+    fieldSteps.forEach((tab) => tab.addEventListener("click", () => setFieldTab(tab.dataset.field)));
+  </script>
+</body>
+</html>

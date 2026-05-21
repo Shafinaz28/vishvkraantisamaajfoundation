@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Vishv Kraanti Samaaj Foundation</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    html, body { font-family: "Poppins", sans-serif; }
+    .container { max-width: 1280px !important; }
+    @keyframes pageLoaderSpin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body class="site-body text-gray-900">
+
+  <div id="pageLoader" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease;">
+    <div style="text-align:center;">
+      <img src="image/logo.png" alt="VKS Foundation" style="height:80px;margin-bottom:24px;">
+      <div style="width:48px;height:48px;border:4px solid rgba(249,115,22,0.2);border-top-color:#f97316;border-radius:50%;animation:pageLoaderSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
+      <p style="color:rgba(255,255,255,0.8);font-size:14px;font-family:'Poppins',sans-serif;">Loading...</p>
+    </div>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+  <!-- Page Hero -->
+  <section class="relative bg-blue-900 text-white py-16 sm:py-20 px-4 sm:px-6 text-center">
+    <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">About Us</h1>
+      <p class="text-blue-100 max-w-2xl mx-auto">
+        Empowering rural students to access education, opportunity, and financial independence.
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT CONTENT -->
+  <section class="py-16 sm:py-20 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+      <!-- Text -->
+      <div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 leading-tight">
+          A dream that began in rural Andhra Pradesh—now a growing movement.
+        </h2>
+
+        <p class="text-gray-700 mt-6 leading-relaxed">
+          Vishv Kraanti Samaaj Foundation was founded in <span class="font-bold">2020</span> (formally registered in
+          <span class="font-bold">2026</span>) by <span class="font-bold">Bondili Sai Manoj</span> and
+          <span class="font-bold">Prasad Majji</span> with a simple yet powerful dream:
+          to ensure that children from rural communities are not left behind in the race for education and opportunity.
+        </p>
+
+        <p class="text-gray-700 mt-4 leading-relaxed">
+          Born out of firsthand experiences of seeing bright young minds struggle due to lack of resources, our NGO began
+          its journey in Andhra Pradesh. Since then, we have been registered under <span class="font-bold">MCA</span> as a
+          <span class="font-bold">Non-Profit Organisation (Section 8 Company)</span> and have grown into a mission-driven
+          initiative that uplifts rural students—guiding them toward urban education and financial independence.
+        </p>
+
+        <!-- Founder Highlight -->
+        <div class="mt-8 bg-white border rounded-2xl p-6 shadow-sm">
+          <h3 class="text-xl font-extrabold text-blue-900 mb-2">
+            <i class="fas fa-users text-orange-500 mr-2"></i> Founded By
+          </h3>
+          <p class="text-gray-700">
+            <span class="font-bold">Bondili Sai Manoj</span> & <span class="font-bold">Prasad Majji</span>
+          </p>
+          <p class="text-sm text-gray-500 mt-2">
+            Built with the belief that talent exists everywhere—opportunity must too.
+          </p>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a href="donate.html"
+            class="inline-flex justify-center bg-orange-500 text-white px-8 py-4 rounded-xl font-extrabold hover:bg-orange-600 transition shadow-md">
+            Donate Now
+          </a>
+          <a href="contact.html"
+            class="inline-flex justify-center border-2 border-blue-900 text-blue-900 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-900 hover:text-white transition">
+            Partner With Us
+          </a>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="relative">
+        <div class="absolute -top-5 -left-5 w-24 h-24 bg-orange-500 rounded-full opacity-20 animate-pulse"></div>
+        <img class="rounded-3xl shadow-2xl w-full object-cover"
+          src="image/aboutimg.jpg"
+          alt="Rural Child Education">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MISSION + VISION -->
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Mission & Vision</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
+          Education is the strongest tool to break the cycle of poverty—and we exist to make it reachable.
+        </p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Mission -->
+        <div class="bg-gray-50 p-8 rounded-3xl border shadow-sm">
+          <div class="text-orange-500 text-3xl mb-4">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3 class="text-2xl font-extrabold text-blue-900 mb-3">Our Mission</h3>
+          <p class="text-gray-700 leading-relaxed">
+            We believe that <span class="font-bold italic">education is the strongest tool to break the cycle of poverty</span>.
+            Rural children often face barriers that prevent them from accessing quality schooling—and this limits their future prospects.
+          </p>
+          <p class="text-gray-700 leading-relaxed mt-4">
+            Our mission is clear:
+            <span class="font-bold">
+              To empower rural students by bridging the gap between village classrooms and urban opportunities, helping
+              them become financially stable and socially confident individuals.
+            </span>
+          </p>
+        </div>
+
+        <!-- Vision -->
+        <div class="bg-gray-50 p-8 rounded-3xl border shadow-sm">
+          <div class="text-orange-500 text-3xl mb-4">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3 class="text-2xl font-extrabold text-blue-900 mb-3">Our Vision</h3>
+          <p class="text-gray-700 leading-relaxed">
+            We envision a future where every child, regardless of where they are born, has equal access to education and
+            the chance to thrive.
+          </p>
+          <p class="text-gray-700 leading-relaxed mt-4">
+            Our long-term goal is to create a society where rural communities are transformed by educated, financially
+            independent youth who contribute positively to the nation’s growth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="py-16 sm:py-20 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">What We Stand For</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
+          Our values guide every program, partnership, and child we support.
+        </p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-white p-7 rounded-2xl shadow-sm border">
+          <div class="text-orange-500 text-3xl mb-3"><i class="fas fa-heart"></i></div>
+          <h3 class="font-extrabold text-blue-900 mb-2">Empathy</h3>
+          <p class="text-sm text-gray-600">We understand realities on the ground and act with care.</p>
+        </div>
+        <div class="bg-white p-7 rounded-2xl shadow-sm border">
+          <div class="text-orange-500 text-3xl mb-3"><i class="fas fa-shield-alt"></i></div>
+          <h3 class="font-extrabold text-blue-900 mb-2">Integrity</h3>
+          <p class="text-sm text-gray-600">We stay transparent, responsible, and accountable.</p>
+        </div>
+        <div class="bg-white p-7 rounded-2xl shadow-sm border">
+          <div class="text-orange-500 text-3xl mb-3"><i class="fas fa-graduation-cap"></i></div>
+          <h3 class="font-extrabold text-blue-900 mb-2">Education First</h3>
+          <p class="text-sm text-gray-600">We focus on learning that improves life outcomes.</p>
+        </div>
+        <div class="bg-white p-7 rounded-2xl shadow-sm border">
+          <div class="text-orange-500 text-3xl mb-3"><i class="fas fa-hands-helping"></i></div>
+          <h3 class="font-extrabold text-blue-900 mb-2">Community</h3>
+          <p class="text-sm text-gray-600">We grow with schools, families and rural partners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-orange-500 py-14 text-center text-white">
+    <div class="container mx-auto px-4 sm:px-6 max-w-3xl">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Be a Part of This Movement</h2>
+      <p class="text-lg mb-8 opacity-90">
+        Your support helps rural children access education, mentorship, and a brighter future.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="donate.html"
+          class="bg-blue-900 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-950 transition shadow-lg">
+          Donate Now
+        </a>
+        <a href="contact.html"
+          class="border-2 border-white px-8 py-4 rounded-xl font-extrabold hover:bg-white hover:text-blue-900 transition shadow-lg">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="includes/load.js"></script>
+
+</body>
+</html>
