@@ -121,46 +121,361 @@
 
     #lightboxImg { transition: opacity .18s ease; }
 
-    /* Fields of Work — roadmap + sketch background */
+    /* Fields of Work — roadmap (reference-style road) */
     #fields-of-work {
-      background:
-        radial-gradient(ellipse 80% 50% at 15% 30%, rgba(249,115,22,.14) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 45% at 88% 15%, rgba(59,130,246,.12) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 70% 85%, rgba(236,72,153,.1) 0%, transparent 48%),
-        radial-gradient(ellipse 50% 35% at 5% 80%, rgba(34,197,94,.08) 0%, transparent 45%),
-        linear-gradient(168deg, #fef7f4 0%, #f4f8ff 42%, #f5f0ff 78%, #faf5ff 100%);
+      background: #e8e6f4;
     }
-    .fields-sketch-dots {
-      background-image: radial-gradient(rgba(148,163,184,.35) 1px, transparent 1px);
-      background-size: 24px 24px;
-      opacity: .4;
+    #fields-of-work .fields-roadmap-bg {
+      background-image: radial-gradient(rgba(109, 40, 217, 0.08) 1.2px, transparent 1.2px);
+      background-size: 16px 16px;
     }
-    .fields-sketch {
+    #fields-of-work .fields-roadmap-blob {
+      position: absolute;
+      border-radius: 50%;
       pointer-events: none;
-      opacity: .35;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      opacity: 0.45;
+    }
+    .fields-roadmap {
+      --road-spine: 11rem;
+      position: relative;
+      max-width: 68rem;
+      margin: 0 auto;
+      padding: 0.25rem 0 0.75rem;
+      min-height: 28rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .fields-roadmap__track {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: var(--road-spine);
+      transform: translateX(-50%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .fields-roadmap__svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .fields-roadmap__road-glow {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 22;
       stroke-linecap: round;
       stroke-linejoin: round;
+      opacity: 0.95;
+      vector-effect: non-scaling-stroke;
     }
-    .fields-sketch--soft { opacity: .22; }
-    .roadmap-step { transition: transform .25s ease; }
-    .roadmap-step.active .roadmap-circle { transform: scale(1.12); box-shadow: 0 12px 28px rgba(0,0,0,.18); }
-    .roadmap-accent { transition: height .25s ease, opacity .25s ease; }
-    .roadmap-step.active .roadmap-accent { opacity: 1; }
-    #fieldCalloutTitle, #fieldCalloutText { transition: opacity .25s ease; }
-    #fields-of-work .roadmap-step.active > span.flex-1 { border-color: #7c3aed; box-shadow: 0 8px 24px rgba(124,58,237,.15); }
-    .roadmap-circle i {
-      font-size: 1.65rem;
-      line-height: 1;
-      display: block;
+    .fields-roadmap__road-main {
+      fill: none;
+      stroke: #7c3aed;
+      stroke-width: 15;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .fields-roadmap__road-dash {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+      stroke-dasharray: 6 8;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .fields-roadmap__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0;
+    }
+    .fields-roadmap-step {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--road-spine) minmax(0, 1fr);
+      column-gap: 1.15rem;
+      align-items: center;
+      flex: 1;
+      min-height: 0;
+      padding: 0;
+      position: relative;
+    }
+    .fields-roadmap-step__spine {
+      grid-column: 2;
+      position: relative;
+      z-index: 4;
+      align-self: stretch;
+      min-height: 100%;
+    }
+    .fields-roadmap-step__node {
+      --node-color: #7c3aed;
+      --node-size: 1.85rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--node-size);
+      height: var(--node-size);
+      margin-left: calc(var(--node-size) / -2);
+      margin-top: calc(var(--node-size) / -2);
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background-color: var(--node-color);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.58rem;
+      letter-spacing: -0.02em;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 3px 10px rgba(91, 33, 182, 0.25);
+      z-index: 2;
+    }
+    .fields-roadmap-step__node::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      transform: translateY(-50%);
+    }
+    .fields-roadmap-step--bend-right .fields-roadmap-step__node {
+      left: 93%;
+    }
+    .fields-roadmap-step--bend-left .fields-roadmap-step__node {
+      left: 7%;
+    }
+    .fields-roadmap-step--bend-right .fields-roadmap-step__node::after {
+      left: calc(100% + 1px);
+      border-left-color: var(--node-color);
+    }
+    .fields-roadmap-step--bend-left .fields-roadmap-step__node::after {
+      right: calc(100% + 1px);
+      border-right-color: var(--node-color);
+    }
+    .fields-roadmap-step__slot--left {
+      grid-column: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      min-width: 0;
+    }
+    .fields-roadmap-step__slot--right {
+      grid-column: 3;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      min-width: 0;
+    }
+    .fields-roadmap-step__card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #fff;
+      border-radius: 0.55rem;
+      padding: 0.4rem 0.7rem;
+      box-shadow: 0 4px 16px rgba(91, 33, 182, 0.1);
+      width: auto;
+      max-width: 16.5rem;
+    }
+    .fields-roadmap-step--bend-left .fields-roadmap-step__card {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+    .fields-roadmap-step__icon {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.35rem;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 0.8rem;
+    }
+    .fields-roadmap-step__body {
+      min-width: 0;
+      flex: 1;
+    }
+    .fields-roadmap-step__body h3 {
+      font-size: 0.66rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+    .fields-roadmap-step__body p {
+      margin-top: 0.1rem;
+      font-size: 0.58rem;
+      line-height: 1.3;
+      color: #64748b;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .fields-roadmap-step__body a {
+      margin-top: 0.12rem;
+      display: inline-block;
+      font-size: 0.54rem;
+      font-weight: 700;
+      text-transform: uppercase;
     }
     @media (min-width: 640px) {
-      .roadmap-circle i { font-size: 1.85rem; }
+      .fields-roadmap { --road-spine: 14rem; max-width: 76rem; min-height: 30rem; }
+      .fields-roadmap-step { column-gap: 1.35rem; }
+      .fields-roadmap-step__node { --node-size: 2rem; font-size: 0.62rem; }
+      .fields-roadmap-step__card { max-width: 19rem; padding: 0.45rem 0.8rem; gap: 0.55rem; }
+      .fields-roadmap-step__icon { width: 2.1rem; height: 2.1rem; font-size: 0.85rem; }
+      .fields-roadmap-step__body h3 { font-size: 0.7rem; }
+      .fields-roadmap-step__body p { font-size: 0.6rem; }
+      .fields-roadmap-step__body a { font-size: 0.55rem; }
     }
-    @media (max-width: 767px) {
-      .roadmap-mobile-line { background: linear-gradient(180deg, #7c3aed 0%, #7c3aed 100%); }
+    @media (max-width: 639px) {
+      .fields-roadmap {
+        --road-spine: 4.75rem;
+        min-height: 34rem;
+        padding: 0.15rem 0 0.5rem;
+      }
+      .fields-roadmap__track { width: var(--road-spine); }
+      .fields-roadmap__road-glow { stroke-width: 16; }
+      .fields-roadmap__road-main { stroke-width: 11; }
+      .fields-roadmap__list {
+        flex: 1;
+        gap: 0;
+      }
+      .fields-roadmap-step {
+        flex: 1;
+        grid-template-columns: minmax(0, 1fr) var(--road-spine) minmax(0, 1fr);
+        column-gap: 0.4rem;
+        align-items: center;
+        min-height: 0;
+        padding: 0.2rem 0;
+      }
+      .fields-roadmap-step__slot--left:not(:has(.fields-roadmap-step__card)),
+      .fields-roadmap-step__slot--right:not(:has(.fields-roadmap-step__card)) {
+        display: none;
+      }
+      .fields-roadmap-step__slot--left {
+        grid-column: 1;
+        justify-content: flex-end;
+        padding-right: 0.15rem;
+      }
+      .fields-roadmap-step__slot--right {
+        grid-column: 3;
+        justify-content: flex-start;
+        padding-left: 0.15rem;
+      }
+      .fields-roadmap-step__spine {
+        grid-column: 2;
+        align-self: stretch;
+        min-height: 100%;
+      }
+      .fields-roadmap-step__card {
+        flex-direction: row !important;
+        text-align: left !important;
+        max-width: 100%;
+        width: 100%;
+        padding: 0.45rem 0.55rem;
+        gap: 0.45rem;
+      }
+      .fields-roadmap-step--bend-left .fields-roadmap-step__card {
+        flex-direction: row !important;
+        text-align: left !important;
+      }
+      .fields-roadmap-step__node {
+        --node-size: 1.65rem;
+        font-size: 0.52rem;
+      }
+      .fields-roadmap-step--bend-right .fields-roadmap-step__node { left: 93%; }
+      .fields-roadmap-step--bend-left .fields-roadmap-step__node { left: 7%; }
+      .fields-roadmap-step__node::after {
+        display: block;
+        border-width: 4px;
+      }
+      .fields-roadmap-step__body h3 { font-size: 0.62rem; }
+      .fields-roadmap-step__body p { font-size: 0.55rem; }
+      .fields-roadmap-step__icon { width: 1.85rem; height: 1.85rem; font-size: 0.75rem; }
     }
     .faq-item summary::-webkit-details-marker { display: none; }
     .faq-item summary::marker { content: ""; }
+
+    /* Sections with background images */
+    .section-bg {
+      position: relative;
+      overflow: hidden;
+      background-image: var(--bg-image);
+      background-size: cover;
+      background-position: center;
+    }
+    .section-bg__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .section-bg__overlay--dark {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.82) 100%);
+    }
+    .section-bg__overlay--blue {
+      background: linear-gradient(120deg, rgba(30, 58, 138, 0.92) 0%, rgba(15, 23, 42, 0.78) 100%);
+    }
+    .section-bg__overlay--light {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 252, 0.88) 100%);
+    }
+    .section-bg__overlay--orange {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.88) 0%, rgba(234, 88, 12, 0.75) 100%);
+    }
+    .section-bg > .container,
+    .section-bg > .container-fluid {
+      position: relative;
+      z-index: 1;
+    }
+    .section-about-bg {
+      background-image: url('image/ourstoryimg.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .section-about-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(249, 250, 251, 0.97) 0%, rgba(249, 250, 251, 0.88) 45%, rgba(249, 250, 251, 0.55) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .section-about-bg > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .section-programs-bg {
+      background-image: url('image/rural-to-urban-education-bridge.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+    }
+    .section-programs-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.94);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .section-programs-bg > .container {
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 768px) {
+      .section-programs-bg { background-attachment: scroll; }
+    }
   </style>
 </head>
 
@@ -205,6 +520,163 @@
   </div>
 </section>
 
+  <!-- OUR FIELDS OF WORK — roadmap infographic -->
+  <section id="fields-of-work" class="py-10 sm:py-14 relative overflow-hidden reveal">
+    <div class="fields-roadmap-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+    <span class="fields-roadmap-blob w-48 h-48 bg-white/40 top-6 -left-16" aria-hidden="true"></span>
+    <span class="fields-roadmap-blob w-32 h-32 bg-white/50 top-1/3 -right-8" aria-hidden="true"></span>
+    <span class="fields-roadmap-blob w-64 h-64 bg-white/35 bottom-8 -right-20" aria-hidden="true"></span>
+
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+      <h2 class="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-violet-800 tracking-wide uppercase reveal-stagger">
+        Our Fields of Work
+      </h2>
+      <p class="text-center text-violet-900/70 mt-3 max-w-2xl mx-auto text-sm sm:text-base reveal-stagger">
+        Follow the path — six pillars of support for rural students.
+      </p>
+
+      <div class="fields-roadmap mt-6 sm:mt-8 reveal-stagger">
+        <div class="fields-roadmap__track" aria-hidden="true">
+          <svg class="fields-roadmap__svg" viewBox="0 0 100 220" preserveAspectRatio="none">
+            <path class="fields-roadmap__road-glow" d="M 50 4 C 50 11, 98 11, 98 18 C 98 36, 2 36, 2 55 C 2 73, 98 73, 98 92 C 98 110, 2 110, 2 128 C 2 147, 98 147, 98 165 C 98 183, 2 183, 2 202 C 2 212, 50 212, 50 218"/>
+            <path class="fields-roadmap__road-main" d="M 50 4 C 50 11, 98 11, 98 18 C 98 36, 2 36, 2 55 C 2 73, 98 73, 98 92 C 98 110, 2 110, 2 128 C 2 147, 98 147, 98 165 C 98 183, 2 183, 2 202 C 2 212, 50 212, 50 218"/>
+            <path class="fields-roadmap__road-dash" d="M 50 4 C 50 11, 98 11, 98 18 C 98 36, 2 36, 2 55 C 2 73, 98 73, 98 92 C 98 110, 2 110, 2 128 C 2 147, 98 147, 98 165 C 98 183, 2 183, 2 202 C 2 212, 50 212, 50 218"/>
+          </svg>
+        </div>
+
+        <ol class="fields-roadmap__list">
+          <li class="fields-roadmap-step fields-roadmap-step--bend-right reveal-stagger">
+            <div class="fields-roadmap-step__slot--left" aria-hidden="true"></div>
+            <div class="fields-roadmap-step__spine">
+              <span class="fields-roadmap-step__node" style="--node-color:#e11d48">01</span>
+            </div>
+            <div class="fields-roadmap-step__slot--right">
+              <div class="fields-roadmap-step__card">
+                <span class="fields-roadmap-step__icon bg-[#e11d48]"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+                <div class="fields-roadmap-step__body">
+                  <h3 class="text-[#e11d48]">Education</h3>
+                  <p>Scholarships, mentorship, and urban school access from village classrooms to city colleges.</p>
+                  <a href="donate.html" class="text-[#e11d48] hover:underline">Know More</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="fields-roadmap-step fields-roadmap-step--bend-left reveal-stagger">
+            <div class="fields-roadmap-step__slot--left">
+              <div class="fields-roadmap-step__card">
+                <span class="fields-roadmap-step__icon bg-[#ca8a04]"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></span>
+                <div class="fields-roadmap-step__body">
+                  <h3 class="text-[#ca8a04]">Health &amp; Nutrition</h3>
+                  <p>Health awareness, hygiene education, and basic medical support for every student.</p>
+                  <a href="donate.html" class="text-[#ca8a04] hover:underline">Know More</a>
+                </div>
+              </div>
+            </div>
+            <div class="fields-roadmap-step__spine">
+              <span class="fields-roadmap-step__node" style="--node-color:#ca8a04">02</span>
+            </div>
+            <div class="fields-roadmap-step__slot--right" aria-hidden="true"></div>
+          </li>
+          <li class="fields-roadmap-step fields-roadmap-step--bend-right reveal-stagger">
+            <div class="fields-roadmap-step__slot--left" aria-hidden="true"></div>
+            <div class="fields-roadmap-step__spine">
+              <span class="fields-roadmap-step__node" style="--node-color:#16a34a">03</span>
+            </div>
+            <div class="fields-roadmap-step__slot--right">
+              <div class="fields-roadmap-step__card">
+                <span class="fields-roadmap-step__icon bg-[#16a34a]"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+                <div class="fields-roadmap-step__body">
+                  <h3 class="text-[#16a34a]">Resilience</h3>
+                  <p>Life skills, counseling, and peer mentoring for confidence in urban life.</p>
+                  <a href="donate.html" class="text-[#16a34a] hover:underline">Know More</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="fields-roadmap-step fields-roadmap-step--bend-left reveal-stagger">
+            <div class="fields-roadmap-step__slot--left">
+              <div class="fields-roadmap-step__card">
+                <span class="fields-roadmap-step__icon bg-[#ea580c]"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span>
+                <div class="fields-roadmap-step__body">
+                  <h3 class="text-[#ea580c]">Livelihood</h3>
+                  <p>Digital literacy, career guidance, and financial planning for self-reliance.</p>
+                  <a href="donate.html" class="text-[#ea580c] hover:underline">Know More</a>
+                </div>
+              </div>
+            </div>
+            <div class="fields-roadmap-step__spine">
+              <span class="fields-roadmap-step__node" style="--node-color:#ea580c">04</span>
+            </div>
+            <div class="fields-roadmap-step__slot--right" aria-hidden="true"></div>
+          </li>
+          <li class="fields-roadmap-step fields-roadmap-step--bend-right reveal-stagger">
+            <div class="fields-roadmap-step__slot--left" aria-hidden="true"></div>
+            <div class="fields-roadmap-step__spine">
+              <span class="fields-roadmap-step__node" style="--node-color:#d97706">05</span>
+            </div>
+            <div class="fields-roadmap-step__slot--right">
+              <div class="fields-roadmap-step__card">
+                <span class="fields-roadmap-step__icon bg-[#d97706]"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                <div class="fields-roadmap-step__body">
+                  <h3 class="text-[#d97706]">Protection</h3>
+                  <p>Mentors guide students on safety, rights, and ethical conduct on their journey.</p>
+                  <a href="donate.html" class="text-[#d97706] hover:underline">Know More</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="fields-roadmap-step fields-roadmap-step--bend-left reveal-stagger">
+            <div class="fields-roadmap-step__slot--left">
+              <div class="fields-roadmap-step__card">
+                <span class="fields-roadmap-step__icon bg-[#6366f1]"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></span>
+                <div class="fields-roadmap-step__body">
+                  <h3 class="text-[#6366f1]">Humanitarian</h3>
+                  <p>Emergency support for fees and supplies when families face sudden hardship.</p>
+                  <a href="donate.html" class="text-[#6366f1] hover:underline">Know More</a>
+                </div>
+              </div>
+            </div>
+            <div class="fields-roadmap-step__spine">
+              <span class="fields-roadmap-step__node" style="--node-color:#6366f1">06</span>
+            </div>
+            <div class="fields-roadmap-step__slot--right" aria-hidden="true"></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="section-bg py-14 sm:py-20 text-white reveal" style="--bg-image: url('image/ngo-skill-development-workshop.jpg')">
+    <div class="section-bg__overlay section-bg__overlay--dark" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <div class="reveal-stagger">
+          <p class="text-orange-400 font-bold uppercase tracking-widest text-xs sm:text-sm">Our Purpose</p>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold leading-tight">Mission &amp; Vision</h2>
+          <p class="mt-4 text-blue-100 text-sm sm:text-base leading-relaxed">
+            <b class="text-white">Mission:</b> Bridge the gap between rural talent and urban opportunity through education, skills, and mentorship.
+          </p>
+          <p class="mt-3 text-blue-100 text-sm sm:text-base leading-relaxed">
+            <b class="text-white">Vision:</b> A generation of self-reliant youth who uplift their families and communities.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-stagger">
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 sm:p-6">
+            <i class="fa-solid fa-bullseye text-orange-400 text-2xl"></i>
+            <h3 class="mt-3 font-extrabold text-lg">Focus</h3>
+            <p class="mt-2 text-blue-100 text-sm">Rural students in Andhra Pradesh and beyond.</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 sm:p-6">
+            <i class="fa-solid fa-handshake text-orange-400 text-2xl"></i>
+            <h3 class="mt-3 font-extrabold text-lg">Approach</h3>
+            <p class="mt-2 text-blue-100 text-sm">Partnerships, transparency, and measurable outcomes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- QUICK IMPACT -->
   <section class="bg-white border-b py-10 sm:py-12 reveal">
     <div class="container mx-auto px-4 sm:px-6">
@@ -226,7 +698,7 @@
   </section>
 
   <!-- ABOUT -->
-  <section class="py-14 sm:py-20 bg-gray-50 reveal">
+  <section class="py-14 sm:py-20 section-about-bg reveal">
     <div class="container mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
       <div class="reveal-stagger">
         <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight border-l-8 border-orange-500 pl-6">
@@ -261,160 +733,52 @@
     </div>
   </section>
 
-  <!-- OUR FIELDS OF WORK — roadmap infographic -->
-  <section id="fields-of-work" class="py-14 sm:py-20 relative overflow-hidden reveal">
-    <div class="fields-sketch-dots absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-
-    <!-- Hand-drawn style sketches -->
-    <svg class="fields-sketch absolute top-8 left-[3%] w-28 h-28 sm:w-36 sm:h-36 text-orange-300" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M20 70 Q35 35 50 55 T80 40" stroke-dasharray="4 5"/>
-      <circle cx="72" cy="28" r="8" fill="currentColor" opacity=".25"/>
-      <path d="M25 78 L35 62 M45 78 L50 58" stroke-width="1.5"/>
-    </svg>
-    <svg class="fields-sketch absolute top-24 right-[5%] w-24 h-24 text-pink-300" viewBox="0 0 80 80" aria-hidden="true" fill="currentColor">
-      <path d="M40 12 L44 28 L60 28 L48 38 L52 54 L40 44 L28 54 L32 38 L20 28 L36 28 Z" opacity=".5"/>
-    </svg>
-    <svg class="fields-sketch fields-sketch--soft absolute top-1/3 left-[8%] w-20 h-32 text-blue-200" viewBox="0 0 60 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="18" y="8" width="24" height="32" rx="3" stroke-dasharray="5 4"/>
-      <line x1="22" y1="18" x2="38" y2="18"/><line x1="22" y1="26" x2="34" y2="26"/>
-      <path d="M12 88 Q30 70 48 88" stroke-width="2.5"/>
-    </svg>
-    <svg class="fields-sketch absolute bottom-32 right-[8%] w-32 h-32 text-emerald-200" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="50" cy="50" r="38" stroke-dasharray="10 8"/>
-      <path d="M35 55 c8-18 22-18 30 0" fill="currentColor" opacity=".15"/>
-      <circle cx="42" cy="48" r="3" fill="currentColor" opacity=".4"/><circle cx="58" cy="48" r="3" fill="currentColor" opacity=".4"/>
-      <path d="M44 62 Q50 68 56 62" stroke-width="1.5"/>
-    </svg>
-    <svg class="fields-sketch fields-sketch--soft absolute bottom-16 left-[6%] w-40 h-24 text-violet-300" viewBox="0 0 120 60" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
-      <path d="M5 45 Q30 15 60 40 T115 25"/>
-      <path d="M10 50 Q40 30 70 48" opacity=".6"/>
-    </svg>
-    <svg class="fields-sketch absolute bottom-8 right-[18%] w-16 h-16 text-amber-300" viewBox="0 0 50 50" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M25 8 L27 20 L39 22 L29 30 L32 42 L25 34 L18 42 L21 30 L11 22 L23 20 Z" opacity=".7"/>
-    </svg>
-    <svg class="fields-sketch fields-sketch--soft absolute top-[45%] right-[2%] w-14 h-40 text-cyan-200 hidden sm:block" viewBox="0 0 40 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M20 5 L20 75 M12 85 L20 95 L28 85"/>
-      <ellipse cx="20" cy="8" rx="6" ry="4" fill="currentColor" opacity=".2"/>
-    </svg>
-    <svg class="fields-sketch absolute top-12 left-[42%] w-12 h-12 text-orange-200 hidden md:block" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="20" cy="20" r="14" stroke-dasharray="3 4"/>
-      <text x="11" y="25" font-size="14" font-family="Poppins,sans-serif" fill="currentColor" opacity=".5" stroke="none">A+</text>
-    </svg>
-
-    <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-violet-200/25 blur-2xl -translate-y-1/3 translate-x-1/4 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-orange-200/20 blur-2xl translate-y-1/4 -translate-x-1/4 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-blue-100/15 blur-3xl pointer-events-none"></div>
-
-    <div class="container mx-auto px-4 sm:px-6 relative z-10">
-      <h2 class="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-orange-500 tracking-wide uppercase reveal-stagger">
-        Our Fields of Work
-      </h2>
-      <p class="text-center text-gray-600 mt-3 max-w-2xl mx-auto text-sm sm:text-base reveal-stagger">
-        Follow our impact path — select a step to explore how we support rural students.
-      </p>
-
-      <div class="hidden md:block mt-14 max-w-6xl mx-auto reveal-stagger">
-        <div class="relative h-[220px]" id="roadmapTimeline">
-          <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 80 75 C 200 75 200 145 320 145 C 440 145 440 75 560 75 C 680 75 680 145 800 145 C 920 145 920 75 1040 75" fill="none" stroke="#1e293b" stroke-width="14" stroke-linecap="round"/>
-            <path d="M 80 75 C 200 75 200 145 320 145 C 440 145 440 75 560 75 C 680 75 680 145 800 145 C 920 145 920 75 1040 75" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="12 14" stroke-linecap="round"/>
-          </svg>
-          <div class="relative z-10 grid grid-cols-6 h-full" id="fieldTabs" role="tablist" aria-label="Fields of work">
-            <button type="button" role="tab" data-field="education" aria-selected="true" class="roadmap-step active flex flex-col items-center justify-start pt-2">
-              <span class="roadmap-accent w-0.5 h-10 bg-orange-500 mb-1 rounded-full opacity-100"></span>
-              <span class="w-3 h-3 rounded-full bg-orange-500 mb-2"></span>
-              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-orange-500 text-white grid place-items-center shadow-lg border-4 border-white"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
-              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-orange-600">Education</span>
-            </button>
-            <button type="button" role="tab" data-field="health" aria-selected="false" class="roadmap-step flex flex-col items-center justify-end pb-2">
-              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-pink-500 order-3">Health</span>
-              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-pink-500 text-white grid place-items-center shadow-lg border-4 border-white order-2"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></span>
-              <span class="w-3 h-3 rounded-full bg-pink-500 my-2 order-1"></span>
-              <span class="roadmap-accent w-0.5 h-10 bg-pink-500 rounded-full opacity-70 order-0"></span>
-            </button>
-            <button type="button" role="tab" data-field="resilience" aria-selected="false" class="roadmap-step flex flex-col items-center justify-start pt-2">
-              <span class="roadmap-accent w-0.5 h-10 bg-cyan-500 mb-1 rounded-full opacity-70"></span>
-              <span class="w-3 h-3 rounded-full bg-cyan-500 mb-2"></span>
-              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-cyan-500 text-white grid place-items-center shadow-lg border-4 border-white"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
-              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-cyan-600">Resilience</span>
-            </button>
-            <button type="button" role="tab" data-field="livelihood" aria-selected="false" class="roadmap-step flex flex-col items-center justify-end pb-2">
-              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 order-3">Livelihood</span>
-              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-emerald-500 text-white grid place-items-center shadow-lg border-4 border-white order-2"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span>
-              <span class="w-3 h-3 rounded-full bg-emerald-500 my-2 order-1"></span>
-              <span class="roadmap-accent w-0.5 h-10 bg-emerald-500 rounded-full opacity-70 order-0"></span>
-            </button>
-            <button type="button" role="tab" data-field="protection" aria-selected="false" class="roadmap-step flex flex-col items-center justify-start pt-2">
-              <span class="roadmap-accent w-0.5 h-10 bg-amber-400 mb-1 rounded-full opacity-70"></span>
-              <span class="w-3 h-3 rounded-full bg-amber-400 mb-2"></span>
-              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-amber-400 text-white grid place-items-center shadow-lg border-4 border-white"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
-              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-amber-600">Protection</span>
-            </button>
-            <button type="button" role="tab" data-field="humanitarian" aria-selected="false" class="roadmap-step flex flex-col items-center justify-end pb-2">
-              <span class="mt-3 text-[11px] font-extrabold uppercase tracking-wider text-blue-700 order-3">Humanitarian</span>
-              <span class="roadmap-circle w-[72px] h-[72px] rounded-full bg-blue-600 text-white grid place-items-center shadow-lg border-4 border-white order-2"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></span>
-              <span class="w-3 h-3 rounded-full bg-blue-600 my-2 order-1"></span>
-              <span class="roadmap-accent w-0.5 h-10 bg-blue-600 rounded-full opacity-70 order-0"></span>
-            </button>
-          </div>
-        </div>
+  <!-- HOW IT WORKS -->
+  <section class="py-14 sm:py-20 bg-white reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 sm:mb-12 reveal-stagger">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">How We Support Students</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">A simple journey from village to opportunity.</p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
       </div>
-
-      <div class="md:hidden mt-10 max-w-md mx-auto relative reveal-stagger">
-        <div class="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-4 rounded-full bg-violet-600 roadmap-mobile-line"></div>
-        <div class="relative space-y-10">
-          <button type="button" data-field="education" class="roadmap-step active w-full flex items-center gap-4 text-left">
-            <span class="shrink-0 w-14 h-14 rounded-full bg-orange-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-book-open text-xl" aria-hidden="true"></i></span>
-            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100"><span class="text-xs font-extrabold uppercase text-red-500">Education</span></span>
-          </button>
-          <button type="button" data-field="health" class="roadmap-step w-full flex items-center gap-4 text-left flex-row-reverse">
-            <span class="shrink-0 w-14 h-14 rounded-full bg-pink-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-heart-pulse text-xl" aria-hidden="true"></i></span>
-            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100 text-right"><span class="text-xs font-extrabold uppercase text-amber-600">Health</span></span>
-          </button>
-          <button type="button" data-field="resilience" class="roadmap-step w-full flex items-center gap-4 text-left">
-            <span class="shrink-0 w-14 h-14 rounded-full bg-cyan-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-bolt text-xl" aria-hidden="true"></i></span>
-            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100"><span class="text-xs font-extrabold uppercase text-emerald-600">Resilience</span></span>
-          </button>
-          <button type="button" data-field="livelihood" class="roadmap-step w-full flex items-center gap-4 text-left flex-row-reverse">
-            <span class="shrink-0 w-14 h-14 rounded-full bg-emerald-500 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-seedling text-xl" aria-hidden="true"></i></span>
-            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100 text-right"><span class="text-xs font-extrabold uppercase text-cyan-600">Livelihood</span></span>
-          </button>
-          <button type="button" data-field="protection" class="roadmap-step w-full flex items-center gap-4 text-left">
-            <span class="shrink-0 w-14 h-14 rounded-full bg-amber-400 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-shield-halved text-xl" aria-hidden="true"></i></span>
-            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100"><span class="text-xs font-extrabold uppercase text-orange-600">Protection</span></span>
-          </button>
-          <button type="button" data-field="humanitarian" class="roadmap-step w-full flex items-center gap-4 text-left flex-row-reverse">
-            <span class="shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white grid place-items-center border-4 border-white shadow-lg z-10"><i class="fa-solid fa-hand-holding-heart text-xl" aria-hidden="true"></i></span>
-            <span class="flex-1 bg-white rounded-2xl shadow-md p-4 border border-violet-100 text-right"><span class="text-xs font-extrabold uppercase text-violet-700">Humanitarian</span></span>
-          </button>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="text-center p-6 sm:p-8 rounded-3xl bg-gray-50 border hover:shadow-lg transition reveal-stagger">
+          <span class="w-14 h-14 mx-auto rounded-2xl bg-blue-900 text-white text-xl grid place-items-center font-extrabold">1</span>
+          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Identify &amp; Connect</h3>
+          <p class="mt-2 text-gray-600 text-sm">We find motivated rural students and connect them with urban schools and mentors.</p>
         </div>
-      </div>
-
-      <div class="mt-10 sm:mt-14 max-w-6xl mx-auto reveal-stagger">
-        <div class="grid grid-cols-1 md:grid-cols-[1.35fr_0.65fr] gap-5 sm:gap-6 items-center">
-          <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-violet-100 p-5 sm:p-8 flex flex-col sm:flex-row gap-5 sm:gap-6 items-start">
-            <div id="fieldCalloutIconWrap" class="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-orange-500 text-white text-2xl sm:text-3xl grid place-items-center shadow-md">
-              <i id="fieldCalloutIcon" class="fa-solid fa-book-open"></i>
-            </div>
-            <div class="flex-1 min-w-0 flex flex-col h-full">
-              <p id="fieldCalloutStep" class="text-xs font-extrabold uppercase tracking-widest text-violet-600 mb-1">Step 01</p>
-              <h3 id="fieldCalloutTitle" class="text-base sm:text-lg font-extrabold uppercase text-gray-900 leading-snug">Shiksha Ki Raksha, Bhavishya Ki Raksha!</h3>
-              <p id="fieldCalloutText" class="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed flex-1">
-                From early childhood to young adulthood, quality education unlocks potential. Vishv Kraanti Samaaj Foundation champions rural students across Andhra Pradesh—scholarships, mentorship, and urban school access remove barriers from village classrooms to city colleges.
-              </p>
-              <a id="fieldKnowMore" href="donate.html" class="mt-5 inline-flex self-start px-8 py-3 rounded-lg font-extrabold text-white uppercase text-sm bg-orange-500 hover:opacity-90 transition shadow-md">Know More</a>
-            </div>
-          </div>
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-violet-100 h-40 sm:h-44 md:h-52 max-w-sm md:max-w-none md:mx-auto w-full">
-            <img id="fieldPanelImg" src="image/rural-to-urban-education-bridge.jpg" alt="Education program" class="w-full h-full object-cover">
-          </div>
+        <div class="text-center p-6 sm:p-8 rounded-3xl bg-gray-50 border hover:shadow-lg transition reveal-stagger">
+          <span class="w-14 h-14 mx-auto rounded-2xl bg-orange-500 text-white text-xl grid place-items-center font-extrabold">2</span>
+          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Support &amp; Train</h3>
+          <p class="mt-2 text-gray-600 text-sm">Scholarships, workshops, and life-skills training build confidence and readiness.</p>
+        </div>
+        <div class="text-center p-6 sm:p-8 rounded-3xl bg-gray-50 border hover:shadow-lg transition reveal-stagger">
+          <span class="w-14 h-14 mx-auto rounded-2xl bg-blue-900 text-white text-xl grid place-items-center font-extrabold">3</span>
+          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Grow &amp; Give Back</h3>
+          <p class="mt-2 text-gray-600 text-sm">Graduates gain careers, support families, and inspire the next generation.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- WHY SUPPORT (bg image) -->
+  <section class="section-bg py-14 sm:py-20 text-white reveal" style="--bg-image: url('image/financial-independence-training.jpg')">
+    <div class="section-bg__overlay section-bg__overlay--orange" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto text-center reveal-stagger">
+        <h2 class="text-3xl sm:text-4xl font-extrabold">Why Your Support Matters</h2>
+        <p class="mt-4 text-blue-50 text-base sm:text-lg leading-relaxed">
+          One sponsored student can change an entire household. Your contribution funds fees, travel, workshops, and emergency help when families face sudden hardship.
+        </p>
+        <a href="donate.html" class="inline-flex mt-8 bg-white text-blue-900 px-10 py-4 rounded-xl font-extrabold hover:bg-orange-50 shadow-lg">
+          Sponsor a Student Today
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- PROGRAMS -->
-  <section id="programs" class="py-14 sm:py-20 bg-white reveal">
+  <section id="programs" class="py-14 sm:py-20 section-programs-bg reveal">
     <div class="container mx-auto px-4 sm:px-6">
       <div class="text-center mb-10 sm:mb-12 reveal-stagger">
         <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Programs That Create Change</h2>
@@ -484,9 +848,10 @@
   </section>
 
   <!-- TESTIMONIAL -->
-  <section class="py-14 sm:py-20 bg-gray-50 reveal">
+  <section class="section-bg py-14 sm:py-20 reveal" style="--bg-image: url('image/img2.jpg')">
+    <div class="section-bg__overlay section-bg__overlay--light" aria-hidden="true"></div>
     <div class="container mx-auto px-4 sm:px-6">
-      <div class="max-w-5xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border relative reveal-stagger">
+      <div class="max-w-5xl mx-auto bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border relative reveal-stagger">
         <i class="fas fa-quote-left text-orange-400 text-5xl absolute -top-6 left-8 opacity-60"></i>
         <h3 class="text-2xl md:text-3xl font-extrabold text-blue-900 mb-5">A Student’s Journey Can Change a Whole Family</h3>
         <p class="text-lg md:text-2xl leading-relaxed italic text-gray-800">
@@ -498,6 +863,37 @@
             <p class="font-extrabold text-blue-900">Narasimha</p>
             <p class="text-gray-600 text-sm italic">Alumni • Education Bridge Program</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET INVOLVED -->
+  <section class="section-bg py-14 sm:py-20 text-white reveal" style="--bg-image: url('image/vks-mentors-volunteers-action.jpg')">
+    <div class="section-bg__overlay section-bg__overlay--blue" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 sm:mb-12 reveal-stagger">
+        <h2 class="text-3xl md:text-4xl font-extrabold">Get Involved</h2>
+        <p class="text-blue-100 mt-3 max-w-2xl mx-auto">Every role helps a student move forward.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-8 text-center hover:bg-white/15 transition reveal-stagger">
+          <i class="fa-solid fa-hand-holding-heart text-4xl text-orange-400"></i>
+          <h3 class="mt-4 text-xl font-extrabold">Donate</h3>
+          <p class="mt-2 text-blue-100 text-sm">Fund scholarships, workshops, and emergency student support.</p>
+          <a href="donate.html" class="inline-flex mt-5 text-orange-300 font-bold hover:text-white">Donate Now →</a>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-8 text-center hover:bg-white/15 transition reveal-stagger">
+          <i class="fa-solid fa-users text-4xl text-orange-400"></i>
+          <h3 class="mt-4 text-xl font-extrabold">Volunteer</h3>
+          <p class="mt-2 text-blue-100 text-sm">Mentor students, help at events, or share your professional skills.</p>
+          <a href="contact.html" class="inline-flex mt-5 text-orange-300 font-bold hover:text-white">Join Us →</a>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-8 text-center hover:bg-white/15 transition reveal-stagger">
+          <i class="fa-solid fa-building text-4xl text-orange-400"></i>
+          <h3 class="mt-4 text-xl font-extrabold">Partner</h3>
+          <p class="mt-2 text-blue-100 text-sm">Schools, colleges, and companies can co-create lasting impact.</p>
+          <a href="contact.html" class="inline-flex mt-5 text-orange-300 font-bold hover:text-white">Partner With Us →</a>
         </div>
       </div>
     </div>
@@ -536,7 +932,8 @@
   </section>
 
   <!-- DONATE CTA -->
-  <section class="bg-blue-900 text-white py-12 sm:py-14 reveal">
+  <section class="section-bg text-white py-12 sm:py-16 reveal" style="--bg-image: url('image/img1.jpg')">
+    <div class="section-bg__overlay section-bg__overlay--blue" aria-hidden="true"></div>
     <div class="container mx-auto px-4 sm:px-6 text-center max-w-4xl reveal-stagger">
       <h2 class="text-3xl sm:text-4xl font-extrabold">Help a Rural Student Reach Their Potential</h2>
       <p class="mt-4 text-blue-100 text-lg">Your donation supports scholarships, skill workshops, and financial literacy guidance.</p>
@@ -547,9 +944,38 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
+  <!-- TRANSPARENCY -->
   <section class="py-14 sm:py-20 bg-gray-50 reveal">
     <div class="container mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="reveal-stagger">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Transparency You Can Trust</h2>
+          <p class="mt-4 text-gray-600 leading-relaxed">
+            We are committed to clear reporting on how donations are used. Funds go directly toward student fees, training, and program operations.
+          </p>
+          <ul class="mt-6 space-y-3 text-gray-700 text-sm sm:text-base">
+            <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i> Registered NGO with documented governance</li>
+            <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i> Bank transfer details shared openly</li>
+            <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-600 mt-1"></i> Regular updates on student progress and events</li>
+          </ul>
+          <a href="impact.html" class="inline-flex mt-8 bg-blue-900 text-white px-8 py-3 rounded-xl font-extrabold hover:bg-blue-950">See Our Impact</a>
+        </div>
+        <div class="relative rounded-3xl overflow-hidden shadow-xl min-h-[280px] reveal-stagger">
+          <img src="image/img3.jpg" alt="Community impact" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
+            <p class="text-orange-300 font-bold uppercase text-xs tracking-widest">Registered 2026</p>
+            <p class="mt-2 text-xl font-extrabold">Vishv Kraanti Samaaj Foundation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section-bg py-14 sm:py-20 reveal" style="--bg-image: url('image/img.jpg')">
+    <div class="section-bg__overlay section-bg__overlay--light" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
       <div class="text-center mb-10 sm:mb-12 reveal-stagger">
         <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Moments That Matter</h2>
         <p class="text-gray-600 mt-3">Scholarships • Workshops • Awareness Drives • Student Interactions</p>
@@ -845,57 +1271,6 @@
     // Start closed
     closeLightbox();
 
-    // -------------------------
-    // FIELDS OF WORK — roadmap steps
-    // -------------------------
-    const fieldData = {
-      education: { step: "01", color: "bg-orange-500", icon: "fa-book-open", image: "image/rural-to-urban-education-bridge.jpg", alt: "Rural to urban education", title: "Shiksha Ki Raksha, Bhavishya Ki Raksha!", text: "From early childhood to young adulthood, quality education unlocks potential. Vishv Kraanti Samaaj Foundation champions rural students across Andhra Pradesh—scholarships, mentorship, and urban school access remove barriers from village classrooms to city colleges. Supporting 100+ students, we help families break the cycle of limited opportunity." },
-      health: { step: "02", color: "bg-pink-500", icon: "fa-heart-pulse", image: "image/img3.jpg", alt: "Health and wellness awareness", title: "Healthy Students, Stronger Futures", text: "Student well-being is essential for learning. We support health awareness sessions, hygiene education, and referrals for basic medical needs so rural youth can attend school without preventable illness holding them back." },
-      resilience: { step: "03", color: "bg-cyan-500", icon: "fa-bolt", image: "image/img2.jpg", alt: "Resilience and life skills", title: "Building Confidence Through Challenges", text: "Life skills, counseling support, and peer mentoring help students adapt to new urban environments. We strengthen emotional resilience so setbacks do not end their education journey." },
-      livelihood: { step: "04", color: "bg-emerald-500", icon: "fa-seedling", image: "image/financial-independence-training.jpg", alt: "Livelihood and financial literacy", title: "Skills That Earn, Futures That Last", text: "Financial literacy workshops, career guidance, and entrepreneurship basics prepare students for real income. We connect rural talent to urban job markets and sustainable livelihood paths." },
-      protection: { step: "05", color: "bg-amber-400", icon: "fa-shield-halved", image: "image/vks-mentors-volunteers-action.jpg", alt: "Student protection and mentorship", title: "Safe Spaces, Trusted Mentors", text: "Volunteer mentors and program coordinators create accountable support networks. Students receive guidance on rights, safety, and ethical conduct throughout their transition from village to city." },
-      humanitarian: { step: "06", color: "bg-blue-600", icon: "fa-hand-holding-heart", image: "image/ngo-skill-development-workshop.jpg", alt: "Humanitarian outreach", title: "Reaching Families In Times Of Need", text: "Emergency support for education costs, workshop supplies, and community outreach during crises. Your contribution helps us respond when rural families face sudden hardship that threatens a child's schooling." }
-    };
-
-    const colorClasses = ["bg-orange-500", "bg-pink-500", "bg-cyan-500", "bg-emerald-500", "bg-amber-400", "bg-blue-600"];
-    const fieldSteps = document.querySelectorAll("#fields-of-work .roadmap-step[data-field]");
-    const fieldCalloutIconWrap = document.getElementById("fieldCalloutIconWrap");
-    const fieldCalloutIcon = document.getElementById("fieldCalloutIcon");
-    const fieldCalloutStep = document.getElementById("fieldCalloutStep");
-    const fieldCalloutTitle = document.getElementById("fieldCalloutTitle");
-    const fieldCalloutText = document.getElementById("fieldCalloutText");
-    const fieldKnowMore = document.getElementById("fieldKnowMore");
-    const fieldPanelImg = document.getElementById("fieldPanelImg");
-
-    function setFieldTab(key) {
-      const data = fieldData[key];
-      if (!data) return;
-
-      fieldSteps.forEach((tab) => {
-        const isActive = tab.dataset.field === key;
-        tab.classList.toggle("active", isActive);
-        if (tab.hasAttribute("aria-selected")) tab.setAttribute("aria-selected", isActive ? "true" : "false");
-      });
-
-      fieldCalloutTitle.style.opacity = "0";
-      fieldCalloutText.style.opacity = "0";
-
-      setTimeout(() => {
-        colorClasses.forEach((c) => { fieldCalloutIconWrap.classList.remove(c); fieldKnowMore.classList.remove(c); });
-        fieldCalloutIconWrap.classList.add(data.color);
-        fieldKnowMore.classList.add(data.color);
-        fieldCalloutIcon.className = "fa-solid " + data.icon;
-        fieldCalloutStep.textContent = "Step " + data.step;
-        fieldCalloutTitle.textContent = data.title;
-        fieldCalloutText.textContent = data.text;
-        fieldPanelImg.src = data.image;
-        fieldPanelImg.alt = data.alt;
-        fieldCalloutTitle.style.opacity = "1";
-        fieldCalloutText.style.opacity = "1";
-      }, 120);
-    }
-
-    fieldSteps.forEach((tab) => tab.addEventListener("click", () => setFieldTab(tab.dataset.field)));
   </script>
 </body>
 </html>
