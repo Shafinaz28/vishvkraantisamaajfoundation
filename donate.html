@@ -22,21 +22,12 @@
   <style>
     html, body { font-family: "Poppins", sans-serif; }
     .container { max-width: 1280px !important; }
-    @keyframes pageLoaderSpin { to { transform: rotate(360deg); } }
   </style>
 </head>
 
 <body class="site-body text-gray-900">
 
-  <div id="pageLoader" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease;">
-    <div style="text-align:center;">
-      <img src="image/logo.png" alt="VKS Foundation" style="height:80px;margin-bottom:24px;">
-      <div style="width:48px;height:48px;border:4px solid rgba(249,115,22,0.2);border-top-color:#f97316;border-radius:50%;animation:pageLoaderSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
-      <p style="color:rgba(255,255,255,0.8);font-size:14px;font-family:'Poppins',sans-serif;">Loading...</p>
-    </div>
-  </div>
-
-  <div id="header-placeholder"></div>
+<div id="header-placeholder"></div>
 
   <!-- HERO -->
   <section class="relative bg-blue-900 text-white py-16 sm:py-20 px-4 sm:px-6 text-center">
@@ -227,15 +218,6 @@
 
         <!-- RIGHT CONTENT -->
         <div class="space-y-6">
-          <div class="relative overflow-hidden rounded-3xl shadow-2xl border bg-white">
-            <img class="w-full h-[420px] object-cover" src="https://images.unsplash.com/photo-1604881991720-f91add269bed?auto=format&fit=crop&w=1400&q=80" alt="Indian student education support">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-            <div class="absolute bottom-0 p-6">
-              <p class="text-white font-extrabold text-2xl">Your donation becomes someone’s turning point.</p>
-              <p class="text-white/90 mt-2 max-w-lg">From rural aspirations to real opportunities—help students gain education, skills, and financial confidence.</p>
-            </div>
-          </div>
-
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="bg-white border rounded-2xl p-6">
               <p class="text-sm font-bold text-blue-900">What your support can do</p>
@@ -269,6 +251,14 @@
                   <i class="fa-regular fa-copy"></i> Copy UPI
                 </button>
               </div>
+
+              <div class="mt-5 flex flex-col items-center text-center">
+                <p class="text-sm font-extrabold text-blue-900 mb-3">Scan QR to Pay</p>
+                <img src="image/scanner.jpeg" alt="UPI QR code for VISHV KRAANTI SAMAAJ FOUNDATION — vishvkraantisamaajfoundatio0758@aubank"
+                     class="w-full max-w-[280px] rounded-xl border border-orange-200 bg-white shadow-sm object-contain">
+                <p class="mt-3 text-xs text-gray-600 max-w-xs">Scan from Paytm, Google Pay, PhonePe, or any UPI app to pay Vishv Kraanti Samaaj Foundation.</p>
+              </div>
+
               <a id="upiPayLink" href="upi://pay?pa=vishvkraantisamaajfoundatio0758@aubank&pn=VISHV%20KRAANTI%20SAMAAJ%20FOUNDATION&cu=INR"
                  class="inline-flex mt-4 w-full justify-center bg-blue-900 text-white px-6 py-3 rounded-xl font-extrabold text-sm hover:bg-blue-950 transition">
                 <i class="fa-solid fa-qrcode mr-2"></i> Pay with UPI App

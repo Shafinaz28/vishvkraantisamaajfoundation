@@ -22,28 +22,27 @@
   html, body { font-family: "Poppins", sans-serif; }
   body { margin: 0; }
   .container { max-width: 1280px !important; }
-  @keyframes pageLoaderSpin { to { transform: rotate(360deg); } }
 
-  /* Hero — compact height (not full viewport) */
+  /* Hero — full viewport section (fills screen below header) */
   .hero-full{
-    min-height: 72vh;
+    min-height: calc(100vh - 7.75rem);
+    min-height: calc(100dvh - 7.75rem);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem 0;
   }
 
-  @media (min-width: 1024px) {
-    .hero-full {
-      min-height: 78vh;
-    }
+  .hero-inner{
+    width: 100%;
   }
 
   /* Mobile */
   @media (max-width: 640px) {
     .hero-full{
-      min-height: 58vh !important;
-      padding: 0 !important;
+      min-height: calc(100vh - 7rem);
+      min-height: calc(100dvh - 7rem);
+      padding: 1.5rem 0 !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -120,6 +119,495 @@
     .slide-left { animation: slideInLeft .22s ease both; }
 
     #lightboxImg { transition: opacity .18s ease; }
+
+    /* Impact lives grid (reference-style) */
+    #impact-lives {
+      background: #faf8f4;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .impact-lives__headline {
+      font-size: clamp(1rem, 1.65vw, 1.45rem);
+      line-height: 1.35;
+      font-weight: 800;
+      color: #111827;
+    }
+    .impact-lives__number {
+      color: #dc2626;
+      font-size: clamp(1.35rem, 2.2vw, 2rem);
+      font-weight: 900;
+      line-height: 1;
+      display: inline;
+      vertical-align: baseline;
+      margin: 0 0.12em;
+    }
+    .impact-lives__left {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .impact-lives__photo {
+      border-radius: 0.35rem;
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
+      flex: 1;
+      min-height: 12rem;
+      width: 100%;
+      object-fit: cover;
+    }
+    @media (min-width: 1024px) {
+      .impact-lives__headline { white-space: nowrap; }
+    }
+    .impact-lives__card {
+      border-radius: 0.65rem;
+      padding: 1.35rem 1.25rem;
+      min-height: 8.5rem;
+      height: 100%;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .impact-lives__card i {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.75rem;
+      opacity: 0.95;
+    }
+    .impact-lives__card p {
+      font-size: 0.95rem;
+      line-height: 1.45;
+      font-weight: 600;
+      margin-top: 2.25rem;
+    }
+    .impact-lives__card--orange { background: #e87722; }
+    .impact-lives__card--yellow { background: #f5b800; }
+    .impact-lives__card--teal { background: #2aab9b; }
+    .impact-lives__card--purple { background: #7b4397; }
+    .impact-lives__card--maroon { background: #8b2942; }
+    .impact-lives__card--green { background: #3d9a4a; }
+
+    /* Success stories — showcase design */
+    .stories-section {
+      background: linear-gradient(180deg, #f8fafc 0%, #fff 45%, #f1f5f9 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .stories-section::before {
+      content: "";
+      position: absolute;
+      top: -6rem;
+      right: -4rem;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .stories-section::after {
+      content: "";
+      position: absolute;
+      bottom: -8rem;
+      left: -6rem;
+      width: 26rem;
+      height: 26rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .stories-showcase {
+      position: relative;
+      width: 100%;
+      max-width: 64rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stories-showcase__frame {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .stories-showcase__viewport {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+    }
+    .stories-showcase__track {
+      display: flex;
+      width: 100%;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .stories-showcase__slide {
+      width: 100%;
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+    .stories-showcase__card {
+      display: grid;
+      grid-template-columns: 1fr;
+      background: #fff;
+      min-height: auto;
+    }
+    @media (min-width: 768px) {
+      .stories-showcase__card {
+        grid-template-columns: 46% 54%;
+        min-height: 22rem;
+      }
+    }
+    .stories-showcase__media {
+      position: relative;
+      overflow: hidden;
+      min-height: 13rem;
+    }
+    @media (min-width: 768px) {
+      .stories-showcase__media { min-height: 22rem; }
+    }
+    .stories-showcase__media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 13rem;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.7s ease;
+    }
+    @media (min-width: 768px) {
+      .stories-showcase__media img { min-height: 22rem; }
+    }
+    .stories-showcase__slide.is-entering .stories-showcase__media img {
+      transform: scale(1.04);
+    }
+    .stories-showcase__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.55) 0%, transparent 55%);
+    }
+    .stories-showcase__badge {
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      z-index: 1;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: #f97316;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+    }
+    .stories-showcase__content {
+      position: relative;
+      padding: 1.35rem 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, #eff6ff 0%, #fff 55%);
+      border-top: 3px solid #f97316;
+    }
+    @media (min-width: 768px) {
+      .stories-showcase__content {
+        padding: 2rem 2rem 2rem 1.75rem;
+        border-top: none;
+        border-left: 3px solid #f97316;
+      }
+    }
+    .stories-showcase__quote-icon {
+      font-size: 1.75rem;
+      color: rgba(30, 58, 138, 0.15);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stories-showcase__quote {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: #1e293b;
+      font-weight: 500;
+      margin: 0;
+    }
+    @media (min-width: 768px) {
+      .stories-showcase__quote { font-size: 1.08rem; line-height: 1.7; }
+    }
+    .stories-showcase__footer {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .stories-showcase__avatar {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+    }
+    .stories-showcase__name {
+      font-weight: 800;
+      color: #1e3a8a;
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+    .stories-showcase__role {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.15rem;
+    }
+    .stories-showcase__arrow {
+      flex-shrink: 0;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      border: none;
+      background: #1e3a8a;
+      color: #fff;
+      display: none;
+      place-items: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
+    }
+    @media (min-width: 768px) {
+      .stories-showcase__arrow { display: grid; }
+    }
+    .stories-showcase__arrow:hover {
+      background: #f97316;
+      transform: scale(1.06);
+    }
+    .stories-showcase__bottom {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) {
+      .stories-showcase__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+      }
+    }
+    .stories-showcase__tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+    }
+    @media (min-width: 640px) {
+      .stories-showcase__tabs { justify-content: flex-start; flex: 1; }
+    }
+    .stories-showcase__tab {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.85rem 0.5rem 0.5rem;
+      border-radius: 999px;
+      border: 2px solid #e2e8f0;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      text-align: left;
+    }
+    .stories-showcase__tab:hover {
+      border-color: #93c5fd;
+    }
+    .stories-showcase__tab.active {
+      border-color: #f97316;
+      background: #fff7ed;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.15);
+    }
+    .stories-showcase__tab-avatar {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    .stories-showcase__tab-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .stories-showcase__tab-name {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      line-height: 1.2;
+    }
+    .stories-showcase__tab-role {
+      font-size: 0.62rem;
+      color: #64748b;
+      line-height: 1.2;
+    }
+    .stories-showcase__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-shrink: 0;
+    }
+    .stories-showcase__counter {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      white-space: nowrap;
+    }
+    .stories-showcase__counter span {
+      color: #f97316;
+      font-size: 1.1rem;
+    }
+    .stories-showcase__dots {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .stories-showcase__dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 50%;
+      background: #cbd5e1;
+      transition: width 0.3s, background 0.3s;
+    }
+    .stories-showcase__dot.active {
+      width: 1.5rem;
+      border-radius: 999px;
+      background: #f97316;
+    }
+    .stories-showcase__mobile-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-top: 0.75rem;
+    }
+    @media (min-width: 768px) {
+      .stories-showcase__mobile-nav { display: none; }
+    }
+    .stories-showcase__mobile-nav .stories-showcase__arrow {
+      display: grid;
+    }
+    .stories-showcase__slide.is-entering .stories-showcase__content {
+      animation: storyContentIn 0.55s ease both;
+    }
+    @keyframes storyContentIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corporate partners marquee */
+    #corporate-partnership {
+      background: #fff;
+      border-top: 1px solid #f3f4f6;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .corporate-partnership__title {
+      color: #dc2626;
+      font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      text-align: center;
+    }
+    .partners-marquee {
+      margin-top: 2rem;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+    .partners-marquee__track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      gap: 3.5rem;
+      padding: 0.5rem 0;
+      animation: partnersMarquee 28s linear infinite;
+    }
+    .partners-marquee:hover .partners-marquee__track {
+      animation-play-state: paused;
+    }
+    @keyframes partnersMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .partners-marquee__item {
+      flex-shrink: 0;
+      width: 10.5rem;
+      height: 4.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
+    }
+    .partners-marquee__item img {
+      max-width: 100%;
+      max-height: 3.5rem;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(20%);
+      opacity: 0.92;
+      transition: filter 0.25s, opacity 0.25s;
+    }
+    .partners-marquee__item:hover img {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+    .partners-marquee__placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      width: 100%;
+      height: 100%;
+      border: 1px dashed #e5e7eb;
+      border-radius: 0.65rem;
+      color: #64748b;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .partners-marquee__placeholder i {
+      font-size: 1.35rem;
+      color: #94a3b8;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .partners-marquee__track {
+        animation: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 1.5rem;
+      }
+      .partners-marquee {
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+    }
 
     /* Fields of Work — roadmap (reference-style road) */
     #fields-of-work {
@@ -481,29 +969,22 @@
 
 <body class="site-body text-gray-900">
 
-  <div id="pageLoader" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease;">
-    <div style="text-align:center;">
-      <img src="image/logo.png" alt="VKS Foundation" style="height:80px;margin-bottom:24px;">
-      <div style="width:48px;height:48px;border:4px solid rgba(249,115,22,0.2);border-top-color:#f97316;border-radius:50%;animation:pageLoaderSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
-      <p style="color:rgba(255,255,255,0.8);font-size:14px;font-family:'Poppins',sans-serif;">Loading...</p>
-    </div>
-  </div>
-
-  <div id="header-placeholder"></div>
+<div id="header-placeholder"></div>
 
 
 <!-- ✅ FIX: HERO section - remove extra py that breaks full height -->
 <section class="relative bg-blue-900 text-white overflow-hidden hero-full">
-  <div class="absolute inset-0 opacity-25 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+  <div class="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+  <div class="absolute inset-0 bg-blue-900/70"></div>
 
   <div class="hero-inner relative container mx-auto px-4 sm:px-6">
     <div class="max-w-6xl mx-auto text-center">
       <img id="heroImage" src="image/hero.png" alt="Hero Image"
-        class="hero-img mx-auto w-64 sm:w-80 md:w-[440px] lg:w-[520px] xl:w-[580px] object-contain mb-4 sm:mb-6 opacity-0">
+        class="hero-img mx-auto w-64 sm:w-80 md:w-[440px] lg:w-[520px] xl:w-[580px] object-contain mb-4 sm:mb-6">
 
       <div class="max-w-3xl mx-auto mb-4 sm:mb-5">
-        <h1 id="heroTitle" class="text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight opacity-0"></h1>
-        <p id="heroSub" class="mt-3 text-blue-100 text-sm sm:text-lg opacity-0"></p>
+        <h1 id="heroTitle" class="text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight">Rural to Urban Education Bridge</h1>
+        <p id="heroSub" class="mt-3 text-blue-100 text-sm sm:text-lg">Supporting students from villages to access quality education in cities.</p>
       </div>
 
       <div class="hero-btns flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
@@ -519,6 +1000,42 @@
     </div>
   </div>
 </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-14 sm:py-20 section-about-bg reveal">
+    <div class="container mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="reveal-stagger">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight border-l-8 border-orange-500 pl-6">
+          Our Story
+        </h2>
+        <p class="mt-5 text-gray-700 text-base sm:text-lg leading-relaxed">
+          Founded in <b>2020</b> (formally registered in <b>2026</b>) by <b>Bondili Sai Manoj</b> and <b>Prasad Majji</b>,
+          Vishv Kraanti Samaaj Foundation began with one dream:
+          <b>rural children should never be left behind</b> due to lack of resources.
+        </p>
+        <p class="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed">
+          From our beginnings in Andhra Pradesh, we have grown into a movement that guides rural students toward
+          <b>urban education</b>, real-world skills, and <b>financial independence</b>.
+        </p>
+
+        <div class="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <a href="about.html"
+            class="inline-flex justify-center bg-blue-900 text-white px-8 py-4 rounded-xl font-extrabold hover:bg-blue-950">
+            Read More About Us
+          </a>
+          <a href="volunteer.html"
+            class="inline-flex justify-center bg-white border-2 border-blue-900 text-blue-900 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-50">
+            Become a Volunteer
+          </a>
+        </div>
+      </div>
+
+      <div class="relative reveal-stagger">
+        <div class="absolute -top-6 -left-6 w-24 h-24 bg-orange-500 rounded-full opacity-20 animate-pulse"></div>
+        <img class="relative z-10 w-full rounded-3xl shadow-2xl object-cover" src="image/ourstoryimg.jpg" alt="Students">
+      </div>
+    </div>
+  </section>
 
   <!-- OUR FIELDS OF WORK — roadmap infographic -->
   <section id="fields-of-work" class="py-10 sm:py-14 relative overflow-hidden reveal">
@@ -646,133 +1163,44 @@
     </div>
   </section>
 
-  <!-- MISSION & VISION -->
-  <section class="section-bg py-14 sm:py-20 text-white reveal" style="--bg-image: url('image/ngo-skill-development-workshop.jpg')">
-    <div class="section-bg__overlay section-bg__overlay--dark" aria-hidden="true"></div>
+  <!-- IMPACT LIVES -->
+  <section id="impact-lives" class="py-14 sm:py-20 reveal">
     <div class="container mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 items-center">
-        <div class="reveal-stagger">
-          <p class="text-orange-400 font-bold uppercase tracking-widest text-xs sm:text-sm">Our Purpose</p>
-          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold leading-tight">Mission &amp; Vision</h2>
-          <p class="mt-4 text-blue-100 text-sm sm:text-base leading-relaxed">
-            <b class="text-white">Mission:</b> Bridge the gap between rural talent and urban opportunity through education, skills, and mentorship.
-          </p>
-          <p class="mt-3 text-blue-100 text-sm sm:text-base leading-relaxed">
-            <b class="text-white">Vision:</b> A generation of self-reliant youth who uplift their families and communities.
-          </p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-stretch">
+        <div class="impact-lives__left reveal-stagger">
+          <h2 class="impact-lives__headline">
+            Lives of <span class="impact-lives__number">100+</span> students changed through our work
+          </h2>
+          <img class="impact-lives__photo mt-5"
+               src="image/ourstoryimg.jpg" alt="Students supported by VKS Foundation">
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-stagger">
-          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 sm:p-6">
-            <i class="fa-solid fa-bullseye text-orange-400 text-2xl"></i>
-            <h3 class="mt-3 font-extrabold text-lg">Focus</h3>
-            <p class="mt-2 text-blue-100 text-sm">Rural students in Andhra Pradesh and beyond.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 h-full content-stretch reveal-stagger">
+          <div class="impact-lives__card impact-lives__card--orange">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <p>Students guided on safety, rights, and ethical conduct through our protection programs.</p>
           </div>
-          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 sm:p-6">
-            <i class="fa-solid fa-handshake text-orange-400 text-2xl"></i>
-            <h3 class="mt-3 font-extrabold text-lg">Approach</h3>
-            <p class="mt-2 text-blue-100 text-sm">Partnerships, transparency, and measurable outcomes.</p>
+          <div class="impact-lives__card impact-lives__card--yellow">
+            <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+            <p>Career guidance, digital literacy, and livelihood training for long-term self-reliance.</p>
+          </div>
+          <div class="impact-lives__card impact-lives__card--teal">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+            <p><b>100+</b> students supported with scholarships, mentorship, and urban school access.</p>
+          </div>
+          <div class="impact-lives__card impact-lives__card--purple">
+            <i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i>
+            <p>Emergency support for fees and supplies when rural families face sudden hardship.</p>
+          </div>
+          <div class="impact-lives__card impact-lives__card--maroon">
+            <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+            <p>Life skills, counseling, and peer mentoring that build confidence in urban life.</p>
+          </div>
+          <div class="impact-lives__card impact-lives__card--green">
+            <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+            <p>Health awareness, hygiene education, and basic medical support for every student.</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUICK IMPACT -->
-  <section class="bg-white border-b py-10 sm:py-12 reveal">
-    <div class="container mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
-        <div class="p-6 rounded-2xl hover:bg-blue-50 transition border reveal-stagger">
-          <h3 class="text-4xl font-extrabold text-blue-900">100+</h3>
-          <p class="text-gray-600 uppercase tracking-widest text-xs font-bold mt-2">Students Supported</p>
-        </div>
-        <div class="p-6 rounded-2xl hover:bg-orange-50 transition border reveal-stagger">
-          <h3 class="text-4xl font-extrabold text-orange-500">25+</h3>
-          <p class="text-gray-600 uppercase tracking-widest text-xs font-bold mt-2">Volunteers Engaged</p>
-        </div>
-        <div class="p-6 rounded-2xl hover:bg-blue-50 transition border reveal-stagger">
-          <h3 class="text-4xl font-extrabold text-blue-900">10+</h3>
-          <p class="text-gray-600 uppercase tracking-widest text-xs font-bold mt-2">Initiatives Completed</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="py-14 sm:py-20 section-about-bg reveal">
-    <div class="container mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-      <div class="reveal-stagger">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight border-l-8 border-orange-500 pl-6">
-          Our Story
-        </h2>
-        <p class="mt-5 text-gray-700 text-base sm:text-lg leading-relaxed">
-          Founded in <b>2020</b> (formally registered in <b>2026</b>) by <b>Bondili Sai Manoj</b> and <b>Prasad Majji</b>,
-          Vishv Kraanti Samaaj Foundation began with one dream:
-          <b>rural children should never be left behind</b> due to lack of resources.
-        </p>
-        <p class="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed">
-          From our beginnings in Andhra Pradesh, we have grown into a movement that guides rural students toward
-          <b>urban education</b>, real-world skills, and <b>financial independence</b>.
-        </p>
-
-        <div class="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <a href="about.html"
-            class="inline-flex justify-center bg-blue-900 text-white px-8 py-4 rounded-xl font-extrabold hover:bg-blue-950">
-            Read More About Us
-          </a>
-          <a href="volunteer.html"
-            class="inline-flex justify-center bg-white border-2 border-blue-900 text-blue-900 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-50">
-            Become a Volunteer
-          </a>
-        </div>
-      </div>
-
-      <div class="relative reveal-stagger">
-        <div class="absolute -top-6 -left-6 w-24 h-24 bg-orange-500 rounded-full opacity-20 animate-pulse"></div>
-        <img class="relative z-10 w-full rounded-3xl shadow-2xl object-cover" src="image/ourstoryimg.jpg" alt="Students">
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="py-14 sm:py-20 bg-white reveal">
-    <div class="container mx-auto px-4 sm:px-6">
-      <div class="text-center mb-10 sm:mb-12 reveal-stagger">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">How We Support Students</h2>
-        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">A simple journey from village to opportunity.</p>
-        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-        <div class="text-center p-6 sm:p-8 rounded-3xl bg-gray-50 border hover:shadow-lg transition reveal-stagger">
-          <span class="w-14 h-14 mx-auto rounded-2xl bg-blue-900 text-white text-xl grid place-items-center font-extrabold">1</span>
-          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Identify &amp; Connect</h3>
-          <p class="mt-2 text-gray-600 text-sm">We find motivated rural students and connect them with urban schools and mentors.</p>
-        </div>
-        <div class="text-center p-6 sm:p-8 rounded-3xl bg-gray-50 border hover:shadow-lg transition reveal-stagger">
-          <span class="w-14 h-14 mx-auto rounded-2xl bg-orange-500 text-white text-xl grid place-items-center font-extrabold">2</span>
-          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Support &amp; Train</h3>
-          <p class="mt-2 text-gray-600 text-sm">Scholarships, workshops, and life-skills training build confidence and readiness.</p>
-        </div>
-        <div class="text-center p-6 sm:p-8 rounded-3xl bg-gray-50 border hover:shadow-lg transition reveal-stagger">
-          <span class="w-14 h-14 mx-auto rounded-2xl bg-blue-900 text-white text-xl grid place-items-center font-extrabold">3</span>
-          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Grow &amp; Give Back</h3>
-          <p class="mt-2 text-gray-600 text-sm">Graduates gain careers, support families, and inspire the next generation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY SUPPORT (bg image) -->
-  <section class="section-bg py-14 sm:py-20 text-white reveal" style="--bg-image: url('image/financial-independence-training.jpg')">
-    <div class="section-bg__overlay section-bg__overlay--orange" aria-hidden="true"></div>
-    <div class="container mx-auto px-4 sm:px-6">
-      <div class="max-w-3xl mx-auto text-center reveal-stagger">
-        <h2 class="text-3xl sm:text-4xl font-extrabold">Why Your Support Matters</h2>
-        <p class="mt-4 text-blue-50 text-base sm:text-lg leading-relaxed">
-          One sponsored student can change an entire household. Your contribution funds fees, travel, workshops, and emergency help when families face sudden hardship.
-        </p>
-        <a href="donate.html" class="inline-flex mt-8 bg-white text-blue-900 px-10 py-4 rounded-xl font-extrabold hover:bg-orange-50 shadow-lg">
-          Sponsor a Student Today
-        </a>
       </div>
     </div>
   </section>
@@ -847,27 +1275,6 @@
     </div>
   </section>
 
-  <!-- TESTIMONIAL -->
-  <section class="section-bg py-14 sm:py-20 reveal" style="--bg-image: url('image/img2.jpg')">
-    <div class="section-bg__overlay section-bg__overlay--light" aria-hidden="true"></div>
-    <div class="container mx-auto px-4 sm:px-6">
-      <div class="max-w-5xl mx-auto bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border relative reveal-stagger">
-        <i class="fas fa-quote-left text-orange-400 text-5xl absolute -top-6 left-8 opacity-60"></i>
-        <h3 class="text-2xl md:text-3xl font-extrabold text-blue-900 mb-5">A Student’s Journey Can Change a Whole Family</h3>
-        <p class="text-lg md:text-2xl leading-relaxed italic text-gray-800">
-          “This NGO gave me the chance to study in Sydney. Today, I am financially independent and supporting my family and other students.”
-        </p>
-        <div class="mt-7 flex items-center gap-4">
-          <div class="w-14 h-14 bg-gray-200 rounded-full border-2 border-orange-500"></div>
-          <div>
-            <p class="font-extrabold text-blue-900">Narasimha</p>
-            <p class="text-gray-600 text-sm italic">Alumni • Education Bridge Program</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- GET INVOLVED -->
   <section class="section-bg py-14 sm:py-20 text-white reveal" style="--bg-image: url('image/vks-mentors-volunteers-action.jpg')">
     <div class="section-bg__overlay section-bg__overlay--blue" aria-hidden="true"></div>
@@ -931,21 +1338,125 @@
     </div>
   </section>
 
-  <!-- DONATE CTA -->
-  <section class="section-bg text-white py-12 sm:py-16 reveal" style="--bg-image: url('image/img1.jpg')">
-    <div class="section-bg__overlay section-bg__overlay--blue" aria-hidden="true"></div>
-    <div class="container mx-auto px-4 sm:px-6 text-center max-w-4xl reveal-stagger">
-      <h2 class="text-3xl sm:text-4xl font-extrabold">Help a Rural Student Reach Their Potential</h2>
-      <p class="mt-4 text-blue-100 text-lg">Your donation supports scholarships, skill workshops, and financial literacy guidance.</p>
-      <div class="mt-7 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-        <a href="donate.html" class="bg-orange-500 px-10 py-4 rounded-xl font-extrabold hover:bg-orange-600 shadow-lg">Donate Now</a>
-        <a href="contact.html" class="bg-white text-blue-900 px-10 py-4 rounded-xl font-extrabold hover:bg-gray-100 shadow-lg">Partner With Us</a>
+  <!-- CORPORATE PARTNERSHIP -->
+  <section id="corporate-partnership" class="py-12 sm:py-14 reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="corporate-partnership__title reveal-stagger">Corporate Partnership</h2>
+
+      <div class="partners-marquee reveal-stagger" aria-label="Corporate partners">
+        <div class="partners-marquee__track" id="partnersMarqueeTrack">
+          <!-- Set 1 — replace img src with your partner logo files in image/partners/ -->
+          <div class="partners-marquee__item">
+            <img src="image/partners/partner1.png" alt="Partner 1"
+                 onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-building"></i><span>Partner 1</span></div>
+          </div>
+          <div class="partners-marquee__item">
+            <img src="image/partners/partner2.png" alt="Partner 2"
+                 onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-handshake"></i><span>Partner 2</span></div>
+          </div>
+          <div class="partners-marquee__item">
+            <img src="image/partners/partner3.png" alt="Partner 3"
+                 onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-graduation-cap"></i><span>Partner 3</span></div>
+          </div>
+          <div class="partners-marquee__item">
+            <img src="image/partners/partner4.png" alt="Partner 4"
+                 onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-briefcase"></i><span>Partner 4</span></div>
+          </div>
+          <div class="partners-marquee__item">
+            <img src="image/partners/partner5.png" alt="Partner 5"
+                 onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-seedling"></i><span>Partner 5</span></div>
+          </div>
+          <!-- Set 2 — duplicate for seamless loop -->
+          <div class="partners-marquee__item" aria-hidden="true">
+            <img src="image/partners/partner1.png" alt="" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-building"></i><span>Partner 1</span></div>
+          </div>
+          <div class="partners-marquee__item" aria-hidden="true">
+            <img src="image/partners/partner2.png" alt="" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-handshake"></i><span>Partner 2</span></div>
+          </div>
+          <div class="partners-marquee__item" aria-hidden="true">
+            <img src="image/partners/partner3.png" alt="" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-graduation-cap"></i><span>Partner 3</span></div>
+          </div>
+          <div class="partners-marquee__item" aria-hidden="true">
+            <img src="image/partners/partner4.png" alt="" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-briefcase"></i><span>Partner 4</span></div>
+          </div>
+          <div class="partners-marquee__item" aria-hidden="true">
+            <img src="image/partners/partner5.png" alt="" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+            <div class="partners-marquee__placeholder" hidden><i class="fa-solid fa-seedling"></i><span>Partner 5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS & RECOGNITIONS -->
+  <section id="awards" class="py-14 sm:py-20 bg-gray-50 reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 sm:mb-12 reveal-stagger">
+        <p class="text-orange-500 font-bold uppercase tracking-widest text-xs sm:text-sm">Our Milestones</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mt-2">Recent Awards &amp; Recognitions</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">Honours and milestones that reflect our commitment to rural student empowerment.</p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <article class="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-lg transition reveal-stagger">
+          <div class="flex items-center justify-between gap-3">
+            <span class="w-11 h-11 rounded-xl bg-orange-100 text-orange-600 grid place-items-center text-lg">
+              <i class="fa-solid fa-award" aria-hidden="true"></i>
+            </span>
+            <span class="text-xs font-extrabold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">2026</span>
+          </div>
+          <h3 class="mt-4 font-extrabold text-blue-900 text-sm sm:text-base leading-snug">Registered Section 8 NGO</h3>
+          <p class="mt-2 text-gray-600 text-sm leading-relaxed">Formally registered under MCA as a non-profit organisation, strengthening transparent governance and CSR partnerships.</p>
+        </article>
+
+        <article class="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-lg transition reveal-stagger">
+          <div class="flex items-center justify-between gap-3">
+            <span class="w-11 h-11 rounded-xl bg-blue-100 text-blue-900 grid place-items-center text-lg">
+              <i class="fa-solid fa-medal" aria-hidden="true"></i>
+            </span>
+            <span class="text-xs font-extrabold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">2025</span>
+          </div>
+          <h3 class="mt-4 font-extrabold text-blue-900 text-sm sm:text-base leading-snug">Community Education Champion</h3>
+          <p class="mt-2 text-gray-600 text-sm leading-relaxed">Recognised by local community leaders for scholarship support and rural-to-urban education bridge programs.</p>
+        </article>
+
+        <article class="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-lg transition reveal-stagger">
+          <div class="flex items-center justify-between gap-3">
+            <span class="w-11 h-11 rounded-xl bg-green-100 text-green-700 grid place-items-center text-lg">
+              <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+            </span>
+            <span class="text-xs font-extrabold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">2024</span>
+          </div>
+          <h3 class="mt-4 font-extrabold text-blue-900 text-sm sm:text-base leading-snug">Youth Skill Development</h3>
+          <p class="mt-2 text-gray-600 text-sm leading-relaxed">Honoured for career readiness, digital literacy, and financial awareness workshops benefiting rural students.</p>
+        </article>
+
+        <article class="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-lg transition reveal-stagger">
+          <div class="flex items-center justify-between gap-3">
+            <span class="w-11 h-11 rounded-xl bg-violet-100 text-violet-700 grid place-items-center text-lg">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </span>
+            <span class="text-xs font-extrabold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">2023</span>
+          </div>
+          <h3 class="mt-4 font-extrabold text-blue-900 text-sm sm:text-base leading-snug">Volunteer Excellence</h3>
+          <p class="mt-2 text-gray-600 text-sm leading-relaxed">Appreciated for mentor-led outreach, student guidance, and consistent support across Andhra Pradesh communities.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- TRANSPARENCY -->
-  <section class="py-14 sm:py-20 bg-gray-50 reveal">
+  <section class="py-14 sm:py-20 bg-white reveal">
     <div class="container mx-auto px-4 sm:px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div class="reveal-stagger">
@@ -1012,6 +1523,200 @@
         <a href="gallery.html"
           class="inline-flex bg-white border-2 border-blue-900 text-blue-900 px-10 py-4 rounded-xl font-extrabold hover:bg-blue-50">
           View Full Gallery
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="py-10 sm:py-14 bg-white reveal">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8 sm:mb-10 reveal-stagger">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">Our Blog</h2>
+        <p class="text-gray-600 mt-2 max-w-2xl mx-auto text-sm sm:text-base">Stories, tips, and news from our work with rural students.</p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7">
+        <article class="group bg-gray-50 border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition reveal-stagger">
+          <a href="blog.html#rural-urban-bridge" class="block">
+            <img class="h-44 w-full object-cover transition duration-300 group-hover:scale-105" src="image/rural-to-urban-education-bridge.jpg" alt="Rural to urban education">
+          </a>
+          <div class="p-5">
+            <p class="text-xs font-bold text-orange-600 uppercase tracking-wide">Education • Mar 2026</p>
+            <h3 class="mt-2 font-extrabold text-blue-900 leading-snug group-hover:text-orange-600 transition">Bridging the Gap: Rural Students in Urban Schools</h3>
+            <p class="mt-2 text-gray-600 text-sm line-clamp-3">How scholarships and mentorship help village students adapt to city classrooms and dream bigger.</p>
+            <a href="blog.html#rural-urban-bridge" class="inline-flex mt-4 text-sm font-bold text-blue-900 hover:text-orange-600">Read More →</a>
+          </div>
+        </article>
+
+        <article class="group bg-gray-50 border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition reveal-stagger">
+          <a href="blog.html#financial-literacy" class="block">
+            <img class="h-44 w-full object-cover transition duration-300 group-hover:scale-105" src="image/financial-independence-training.jpg" alt="Financial literacy workshop">
+          </a>
+          <div class="p-5">
+            <p class="text-xs font-bold text-orange-600 uppercase tracking-wide">Finance • Feb 2026</p>
+            <h3 class="mt-2 font-extrabold text-blue-900 leading-snug group-hover:text-orange-600 transition">Why Financial Literacy Matters for Rural Youth</h3>
+            <p class="mt-2 text-gray-600 text-sm line-clamp-3">Savings, budgeting, and planning skills that help students and families build long-term stability.</p>
+            <a href="blog.html#financial-literacy" class="inline-flex mt-4 text-sm font-bold text-blue-900 hover:text-orange-600">Read More →</a>
+          </div>
+        </article>
+
+        <article class="group bg-gray-50 border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition reveal-stagger">
+          <a href="blog.html#skill-workshops" class="block">
+            <img class="h-44 w-full object-cover transition duration-300 group-hover:scale-105" src="image/ngo-skill-development-workshop.jpg" alt="Skill development workshop">
+          </a>
+          <div class="p-5">
+            <p class="text-xs font-bold text-orange-600 uppercase tracking-wide">Skills • Jan 2026</p>
+            <h3 class="mt-2 font-extrabold text-blue-900 leading-snug group-hover:text-orange-600 transition">Skill Workshops That Open Career Doors</h3>
+            <p class="mt-2 text-gray-600 text-sm line-clamp-3">Digital literacy and communication training preparing students for interviews and first jobs.</p>
+            <a href="blog.html#skill-workshops" class="inline-flex mt-4 text-sm font-bold text-blue-900 hover:text-orange-600">Read More →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="text-center mt-8 reveal-stagger">
+        <a href="blog.html" class="inline-flex bg-blue-900 text-white px-8 py-3 rounded-xl font-extrabold hover:bg-blue-950 shadow-md text-sm sm:text-base">
+          View All Posts
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS STORIES -->
+  <section id="success-stories" class="stories-section py-12 sm:py-16 reveal">
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+      <div class="text-center mb-8 sm:mb-10 reveal-stagger">
+        <p class="text-orange-500 font-bold uppercase tracking-widest text-xs sm:text-sm">Real Journeys</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mt-1">Success Stories</h2>
+        <p class="text-gray-600 mt-2 max-w-2xl mx-auto text-sm sm:text-base">From village classrooms to confident careers — see how support changes lives.</p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-4"></div>
+      </div>
+
+      <div id="storiesSlider" class="stories-showcase reveal-stagger">
+        <div class="stories-showcase__frame">
+          <button type="button" class="stories-showcase__arrow" id="storiesPrev" aria-label="Previous story">
+            <i class="fa-solid fa-chevron-left text-sm"></i>
+          </button>
+
+          <div class="stories-showcase__viewport">
+            <div class="stories-showcase__track" id="storiesTrack">
+              <article class="stories-showcase__slide is-entering">
+                <div class="stories-showcase__card">
+                  <div class="stories-showcase__media">
+                    <img src="image/rural-to-urban-education-bridge.jpg" alt="Education bridge program">
+                    <span class="stories-showcase__badge">Education Bridge</span>
+                  </div>
+                  <div class="stories-showcase__content">
+                    <i class="fa-solid fa-quote-left stories-showcase__quote-icon" aria-hidden="true"></i>
+                    <blockquote class="stories-showcase__quote">This NGO gave me the chance to study in Sydney. Today, I am financially independent and supporting my family and other students.</blockquote>
+                    <footer class="stories-showcase__footer">
+                      <div class="stories-showcase__avatar bg-blue-100 text-blue-900">N</div>
+                      <div>
+                        <p class="stories-showcase__name">Narasimha</p>
+                        <p class="stories-showcase__role">Alumni • Urban Education</p>
+                      </div>
+                    </footer>
+                  </div>
+                </div>
+              </article>
+
+              <article class="stories-showcase__slide">
+                <div class="stories-showcase__card">
+                  <div class="stories-showcase__media">
+                    <img src="image/ngo-skill-development-workshop.jpg" alt="Skill development workshop">
+                    <span class="stories-showcase__badge">Skill Training</span>
+                  </div>
+                  <div class="stories-showcase__content">
+                    <i class="fa-solid fa-quote-left stories-showcase__quote-icon" aria-hidden="true"></i>
+                    <blockquote class="stories-showcase__quote">Workshops on computers and communication helped me face interviews with confidence. I got my first job in the city within months.</blockquote>
+                    <footer class="stories-showcase__footer">
+                      <div class="stories-showcase__avatar bg-orange-100 text-orange-700">P</div>
+                      <div>
+                        <p class="stories-showcase__name">Priya</p>
+                        <p class="stories-showcase__role">Student • Career Readiness</p>
+                      </div>
+                    </footer>
+                  </div>
+                </div>
+              </article>
+
+              <article class="stories-showcase__slide">
+                <div class="stories-showcase__card">
+                  <div class="stories-showcase__media">
+                    <img src="image/financial-independence-training.jpg" alt="Financial literacy training">
+                    <span class="stories-showcase__badge">Financial Literacy</span>
+                  </div>
+                  <div class="stories-showcase__content">
+                    <i class="fa-solid fa-quote-left stories-showcase__quote-icon" aria-hidden="true"></i>
+                    <blockquote class="stories-showcase__quote">Learning to save and plan expenses changed how my family thinks about money. Now I help my parents manage household finances too.</blockquote>
+                    <footer class="stories-showcase__footer">
+                      <div class="stories-showcase__avatar bg-green-100 text-green-700">R</div>
+                      <div>
+                        <p class="stories-showcase__name">Ravi</p>
+                        <p class="stories-showcase__role">Student • Financial Stability</p>
+                      </div>
+                    </footer>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <button type="button" class="stories-showcase__arrow" id="storiesNext" aria-label="Next story">
+            <i class="fa-solid fa-chevron-right text-sm"></i>
+          </button>
+        </div>
+
+        <div class="stories-showcase__mobile-nav">
+          <button type="button" class="stories-showcase__arrow stories-showcase__arrow--mobile-prev" aria-label="Previous story">
+            <i class="fa-solid fa-chevron-left text-sm"></i>
+          </button>
+          <button type="button" class="stories-showcase__arrow stories-showcase__arrow--mobile-next" aria-label="Next story">
+            <i class="fa-solid fa-chevron-right text-sm"></i>
+          </button>
+        </div>
+
+        <div class="stories-showcase__bottom">
+          <div class="stories-showcase__tabs" id="storiesTabs" role="tablist" aria-label="Choose a success story">
+            <button type="button" class="stories-showcase__tab active" data-slide="0" role="tab" aria-selected="true">
+              <span class="stories-showcase__tab-avatar bg-blue-100 text-blue-900">N</span>
+              <span class="stories-showcase__tab-text">
+                <span class="stories-showcase__tab-name">Narasimha</span>
+                <span class="stories-showcase__tab-role">Urban Education</span>
+              </span>
+            </button>
+            <button type="button" class="stories-showcase__tab" data-slide="1" role="tab" aria-selected="false">
+              <span class="stories-showcase__tab-avatar bg-orange-100 text-orange-700">P</span>
+              <span class="stories-showcase__tab-text">
+                <span class="stories-showcase__tab-name">Priya</span>
+                <span class="stories-showcase__tab-role">Career Readiness</span>
+              </span>
+            </button>
+            <button type="button" class="stories-showcase__tab" data-slide="2" role="tab" aria-selected="false">
+              <span class="stories-showcase__tab-avatar bg-green-100 text-green-700">R</span>
+              <span class="stories-showcase__tab-text">
+                <span class="stories-showcase__tab-name">Ravi</span>
+                <span class="stories-showcase__tab-role">Financial Stability</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="stories-showcase__meta">
+            <p class="stories-showcase__counter" id="storiesCounter"><span>01</span> / 03</p>
+            <div class="stories-showcase__dots" id="storiesDots">
+              <button type="button" class="stories-showcase__dot active" data-slide="0" aria-label="Story 1"></button>
+              <button type="button" class="stories-showcase__dot" data-slide="1" aria-label="Story 2"></button>
+              <button type="button" class="stories-showcase__dot" data-slide="2" aria-label="Story 3"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8 sm:mt-10 reveal-stagger">
+        <a href="impact.html"
+           class="inline-flex bg-blue-900 text-white px-8 py-3 rounded-xl font-extrabold hover:bg-blue-950 shadow-md text-sm sm:text-base">
+          Read More Impact Stories
         </a>
       </div>
     </div>
@@ -1087,13 +1792,6 @@
           </div>
         </details>
       </div>
-
-      <div class="mt-10 text-center reveal-stagger">
-        <p class="text-gray-600 text-sm">Still have questions?</p>
-        <a href="contact.html" class="inline-flex mt-4 bg-blue-900 text-white px-8 py-3 rounded-xl font-extrabold hover:bg-blue-950 transition">
-          Contact Us
-        </a>
-      </div>
     </div>
   </section>
 
@@ -1144,8 +1842,13 @@
       { title: "Financial Independence", sub: "Guidance on savings, entrepreneurship, and long-term stability." }
     ];
 
-    function showHeroSlide(i) {
+    function showHeroSlide(i, animate) {
       const slide = heroSlides[i];
+      if (!animate) {
+        heroTitle.textContent = slide.title;
+        heroSub.textContent = slide.sub;
+        return;
+      }
       heroTitle.classList.remove("fade-up");
       heroSub.classList.remove("fade-up");
       heroTitle.style.opacity = "0";
@@ -1162,15 +1865,11 @@
       }, 80);
     }
 
-    window.addEventListener("load", () => {
-      heroImage.style.opacity = "1";
-      heroImage.classList.add("pop-in");
-
+    window.addEventListener("DOMContentLoaded", () => {
       let idx = 0;
-      showHeroSlide(idx);
       setInterval(() => {
         idx = (idx + 1) % heroSlides.length;
-        showHeroSlide(idx);
+        showHeroSlide(idx, true);
       }, 2600);
     });
 
@@ -1270,6 +1969,96 @@
 
     // Start closed
     closeLightbox();
+
+    // Success stories showcase — auto-advance
+    (function initStoriesSlider() {
+      const track = document.getElementById("storiesTrack");
+      const slider = document.getElementById("storiesSlider");
+      if (!track || !slider) return;
+
+      const slides = track.querySelectorAll(".stories-showcase__slide");
+      const dots = slider.querySelectorAll(".stories-showcase__dot");
+      const tabs = slider.querySelectorAll(".stories-showcase__tab");
+      const counter = document.getElementById("storiesCounter");
+      const btnPrev = document.getElementById("storiesPrev");
+      const btnNext = document.getElementById("storiesNext");
+      const mobilePrev = slider.querySelector(".stories-showcase__arrow--mobile-prev");
+      const mobileNext = slider.querySelector(".stories-showcase__arrow--mobile-next");
+      let index = 0;
+      let timer = null;
+      const AUTO_MS = 5000;
+
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function goTo(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        slides.forEach((slide, si) => {
+          slide.classList.toggle("is-entering", si === index);
+        });
+        dots.forEach((dot, di) => {
+          dot.classList.toggle("active", di === index);
+        });
+        tabs.forEach((tab, ti) => {
+          tab.classList.toggle("active", ti === index);
+          tab.setAttribute("aria-selected", ti === index ? "true" : "false");
+        });
+        if (counter) {
+          counter.innerHTML = `<span>${pad(index + 1)}</span> / ${pad(slides.length)}`;
+        }
+      }
+
+      function next() { goTo(index + 1); }
+      function prev() { goTo(index - 1); }
+
+      function startAutoplay() {
+        clearInterval(timer);
+        timer = setInterval(next, AUTO_MS);
+      }
+
+      function resetAutoplay() {
+        startAutoplay();
+      }
+
+      btnNext?.addEventListener("click", () => { next(); resetAutoplay(); });
+      btnPrev?.addEventListener("click", () => { prev(); resetAutoplay(); });
+      mobileNext?.addEventListener("click", () => { next(); resetAutoplay(); });
+      mobilePrev?.addEventListener("click", () => { prev(); resetAutoplay(); });
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          goTo(Number(dot.dataset.slide));
+          resetAutoplay();
+        });
+      });
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          goTo(Number(tab.dataset.slide));
+          resetAutoplay();
+        });
+      });
+
+      slider.addEventListener("mouseenter", () => clearInterval(timer));
+      slider.addEventListener("mouseleave", startAutoplay);
+
+      let touchStartX = 0;
+      slider.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      slider.addEventListener("touchend", (e) => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) next(); else prev();
+          resetAutoplay();
+        }
+      }, { passive: true });
+
+      goTo(0);
+      startAutoplay();
+    })();
 
   </script>
 </body>

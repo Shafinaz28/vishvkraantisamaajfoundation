@@ -21,7 +21,6 @@
   <style>
     html, body { font-family: "Poppins", sans-serif; }
     .container { max-width: 1280px !important; }
-    @keyframes pageLoaderSpin { to { transform: rotate(360deg); } }
 
     /* Lightbox open/close */
     #lightbox {
@@ -52,15 +51,7 @@
 
 <body class="site-body text-gray-900">
 
-  <div id="pageLoader" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease;">
-    <div style="text-align:center;">
-      <img src="image/logo.png" alt="VKS Foundation" style="height:80px;margin-bottom:24px;">
-      <div style="width:48px;height:48px;border:4px solid rgba(249,115,22,0.2);border-top-color:#f97316;border-radius:50%;animation:pageLoaderSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
-      <p style="color:rgba(255,255,255,0.8);font-size:14px;font-family:'Poppins',sans-serif;">Loading...</p>
-    </div>
-  </div>
-
-  <div id="header-placeholder"></div>
+<div id="header-placeholder"></div>
 
   <!-- Hero -->
   <section class="relative bg-blue-900 text-white py-16 sm:py-20 px-4 sm:px-6 text-center">

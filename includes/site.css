@@ -3,15 +3,9 @@ html {
   min-height: 100%;
 }
 
-/* GSAP full-page transition */
+/* GSAP page transition overlay (disabled — no load flash) */
 #pageTransition {
-  position: fixed;
-  inset: 0;
-  z-index: 99998;
-  background: linear-gradient(135deg, #1e3a8a 0%, #172554 50%, #0f172a 100%);
-  transform: scaleY(0);
-  transform-origin: top;
-  pointer-events: none;
+  display: none !important;
 }
 
 /* Floating WhatsApp — fixed bottom-right, all pages (always on top) */

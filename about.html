@@ -21,21 +21,12 @@
   <style>
     html, body { font-family: "Poppins", sans-serif; }
     .container { max-width: 1280px !important; }
-    @keyframes pageLoaderSpin { to { transform: rotate(360deg); } }
   </style>
 </head>
 
 <body class="site-body text-gray-900">
 
-  <div id="pageLoader" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease;">
-    <div style="text-align:center;">
-      <img src="image/logo.png" alt="VKS Foundation" style="height:80px;margin-bottom:24px;">
-      <div style="width:48px;height:48px;border:4px solid rgba(249,115,22,0.2);border-top-color:#f97316;border-radius:50%;animation:pageLoaderSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
-      <p style="color:rgba(255,255,255,0.8);font-size:14px;font-family:'Poppins',sans-serif;">Loading...</p>
-    </div>
-  </div>
-
-  <div id="header-placeholder"></div>
+<div id="header-placeholder"></div>
 
   <!-- Page Hero -->
   <section class="relative bg-blue-900 text-white py-16 sm:py-20 px-4 sm:px-6 text-center">
@@ -159,8 +150,36 @@
     </div>
   </section>
 
-  <!-- VALUES -->
+  <!-- HOW WE SUPPORT STUDENTS -->
   <section class="py-16 sm:py-20 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">How We Support Students</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">A simple journey from village to opportunity.</p>
+        <div class="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="text-center p-6 sm:p-8 rounded-3xl bg-white border shadow-sm hover:shadow-lg transition">
+          <span class="w-14 h-14 mx-auto rounded-2xl bg-blue-900 text-white text-xl grid place-items-center font-extrabold">1</span>
+          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Identify &amp; Connect</h3>
+          <p class="mt-2 text-gray-600 text-sm">We find motivated rural students and connect them with urban schools and mentors.</p>
+        </div>
+        <div class="text-center p-6 sm:p-8 rounded-3xl bg-white border shadow-sm hover:shadow-lg transition">
+          <span class="w-14 h-14 mx-auto rounded-2xl bg-orange-500 text-white text-xl grid place-items-center font-extrabold">2</span>
+          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Support &amp; Train</h3>
+          <p class="mt-2 text-gray-600 text-sm">Scholarships, workshops, and life-skills training build confidence and readiness.</p>
+        </div>
+        <div class="text-center p-6 sm:p-8 rounded-3xl bg-white border shadow-sm hover:shadow-lg transition">
+          <span class="w-14 h-14 mx-auto rounded-2xl bg-blue-900 text-white text-xl grid place-items-center font-extrabold">3</span>
+          <h3 class="mt-4 text-lg font-extrabold text-blue-900">Grow &amp; Give Back</h3>
+          <p class="mt-2 text-gray-600 text-sm">Graduates gain careers, support families, and inspire the next generation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="py-16 sm:py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900">What We Stand For</h2>
